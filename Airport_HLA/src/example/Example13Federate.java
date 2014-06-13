@@ -180,7 +180,7 @@ public class Example13Federate
 		//       in that case, we'll just try and join it
 		try
 		{
-			File fom = new File( "testfom.fed" );
+			File fom = new File( "resources/test.fed" );
 			rtiamb.createFederationExecution( "ExampleFederation",
 			                                  fom.toURI().toURL() );
 			log( "Created Federation" );
