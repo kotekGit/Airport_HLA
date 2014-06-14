@@ -43,11 +43,6 @@ public class SamolotFederat extends Federat<SamolotAmbasador> {
 		
 	}
 
-	@Override
-	public void naKoniec() {
-		// TODO Auto-generated method stub
-		
-	}
 
 	@Override
 	public void poDolaczeniuDoFederacji() {
@@ -68,5 +63,6 @@ public class SamolotFederat extends Federat<SamolotAmbasador> {
 		
 	}
 
-
+	@Override
+	public void naKoniec() {}
 }

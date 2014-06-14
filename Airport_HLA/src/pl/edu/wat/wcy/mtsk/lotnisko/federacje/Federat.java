@@ -56,13 +56,14 @@ public abstract class Federat<T extends Ambasador> {
 	// CONSTRUCTORS
 	// ----------------------------------------------------------
 
+	public Federat(String nazwa) {
+		nazwaFederata = nazwa;
+	}
+	
 	// ----------------------------------------------------------
 	// INSTANCE METHODS
 	// ----------------------------------------------------------
 
-	public Federat(String nazwa) {
-		nazwaFederata = nazwa;
-	}
 
 	public void dolaczDoFederacji(String nazwaFederacji, T ambasador)
 			throws FederateAlreadyExecutionMember,
