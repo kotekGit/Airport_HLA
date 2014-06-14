@@ -1,7 +1,9 @@
 package pl.edu.wat.wcy.mtsk.lotnisko.start;
 
 import hla.rti.RTIexception;
+import pl.edu.wat.wcy.mtsk.lotnisko.ambasadorzy.SamolotAmbasador;
 import pl.edu.wat.wcy.mtsk.lotnisko.federacje.GuiFederat;
+import pl.edu.wat.wcy.mtsk.lotnisko.federacje.SamolotFederat;
 
 /**
  * Uruchomienie federacji samolotu
@@ -19,7 +21,7 @@ public class Samolot {
 		try
 		{
 			// run the example federate
-			new GuiFederat().runFederate( federateName );
+			new SamolotFederat(federateName).runFederate(new SamolotAmbasador() );
 		}
 		catch( RTIexception rtie )
 		{

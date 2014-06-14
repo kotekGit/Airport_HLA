@@ -1,5 +1,6 @@
 package pl.edu.wat.wcy.mtsk.lotnisko.start;
 
+import pl.edu.wat.wcy.mtsk.lotnisko.ambasadorzy.GuiAmbasador;
 import pl.edu.wat.wcy.mtsk.lotnisko.federacje.GuiFederat;
 import hla.rti.RTIexception;
 
@@ -23,7 +24,7 @@ public class Gui {
 		try
 		{
 			// run the example federate
-			new GuiFederat().runFederate( federateName );
+			new GuiFederat(federateName).runFederate( new GuiAmbasador());
 		}
 		catch( RTIexception rtie )
 		{
