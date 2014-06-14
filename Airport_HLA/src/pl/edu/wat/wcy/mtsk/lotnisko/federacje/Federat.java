@@ -119,7 +119,7 @@ public abstract class Federat<T extends Ambasador> {
 	 * need to change this code, rather than more code throughout the whole
 	 * class.
 	 */
-	private LogicalTime convertTime(double time) {
+	protected LogicalTime convertTime(double time) {
 		// PORTICO SPECIFIC!!
 		return new DoubleTime(time);
 	}
