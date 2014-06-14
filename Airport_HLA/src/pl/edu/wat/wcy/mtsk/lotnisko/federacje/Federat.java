@@ -33,6 +33,14 @@ import org.portico.impl.hla13.types.DoubleTimeInterval;
 import pl.edu.wat.wcy.mtsk.lotnisko.Utils;
 import pl.edu.wat.wcy.mtsk.lotnisko.ambasadorzy.Ambasador;
 
+/**
+ * Abstrakt federata.
+ * 
+ * @author mariusz
+ *
+ * @param <T> - dziedziczy po Ambasador
+ * @see Ambasador
+ */
 public abstract class Federat<T extends Ambasador> {
 	// ----------------------------------------------------------
 	// STATIC VARIABLES
@@ -119,7 +127,7 @@ public abstract class Federat<T extends Ambasador> {
 	 * need to change this code, rather than more code throughout the whole
 	 * class.
 	 */
-	private LogicalTime convertTime(double time) {
+	protected LogicalTime convertTime(double time) {
 		// PORTICO SPECIFIC!!
 		return new DoubleTime(time);
 	}
@@ -127,15 +135,11 @@ public abstract class Federat<T extends Ambasador> {
 	/**
 	 * Same as for {@link #convertTime(double)}
 	 */
-	private LogicalTimeInterval convertInterval(double time) {
+	protected LogicalTimeInterval convertInterval(double time) {
 		// PORTICO SPECIFIC!!
 		return new DoubleTimeInterval(time);
 	}
-
-	// /////////////////////////////////////////////////////////////////////////
-	// //////////////////////// Main Simulation Method /////////////////////////
-	// /////////////////////////////////////////////////////////////////////////
-
+	
 	// //////////////////////////////////////////////////////////////////////////
 	// //////////////////////////// Helper Methods
 	// //////////////////////////////
@@ -153,9 +157,7 @@ public abstract class Federat<T extends Ambasador> {
 		LogicalTime currentTime = convertTime(fedamb.federateTime);
 		LogicalTimeInterval lookahead = convertInterval(fedamb.federateLookahead);
 
-		// //////////////////////////
-		// enable time regulation //
-		// //////////////////////////
+		// enable time regulation
 		this.rtiamb.enableTimeRegulation(currentTime, lookahead);
 
 		// tick until we get the callback
@@ -163,9 +165,7 @@ public abstract class Federat<T extends Ambasador> {
 			rtiamb.tick();
 		}
 
-		// ///////////////////////////
-		// enable time constrained //
-		// ///////////////////////////
+		// enable time constrained
 		this.rtiamb.enableTimeConstrained();
 
 		// tick until we get the callback
@@ -224,6 +224,7 @@ public abstract class Federat<T extends Ambasador> {
 
 	/**
 	 * Metoda odpalana przed końcem działania federata.
+	 * (Opcjonalna)
 	 */
 	public abstract void naKoniec();
 
@@ -262,17 +263,15 @@ public abstract class Federat<T extends Ambasador> {
 
 		czekajNaSynchronizacjeFederacji();
 		
-		// 6. enable time policies //
-		// ///////////////////////////
+		// 6. enable time policies
+		
 		// in this section we enable/disable all time policies
 		// note that this step is optional!
 		// TODO na potem
 		// enableTimePolicy();
 		// log("Time Policy Enabled");
 
-		// ////////////////////////////
-		// 7. publish and subscribe //
-		// ////////////////////////////
+		// 7. publish and subscribe 
 		// in this section we tell the RTI of all the data we are going to
 		// produce, and all the data we want to know about		
 		zainicjujPublikacje();
@@ -325,56 +324,6 @@ public abstract class Federat<T extends Ambasador> {
 		int classHandle = rtiamb
 				.getObjectClassHandle(nazwaObiektu/* "ObjectRoot.A" */);
 		return rtiamb.registerObjectInstance(classHandle);
-	}
-
-	/**
-	 * This method will update all the values of the given object instance. It
-	 * will set each of the values to be a string which is equal to the name of
-	 * the attribute plus the current time. eg "aa:10.0" if the time is 10.0.
-	 * <p/>
-	 * Note that we don't actually have to update all the attributes at once, we
-	 * could update them individually, in groups or not at all!
-	 */
-	protected void updateAttributeValues(int objectHandle) throws RTIexception {
-		// /////////////////////////////////////////////
-		// create the necessary container and values //
-		// /////////////////////////////////////////////
-		// create the collection to store the values in, as you can see
-		// this is quite a lot of work
-		SuppliedAttributes attributes = RtiFactoryFactory.getRtiFactory()
-				.createSuppliedAttributes();
-
-		// generate the new values
-		// we use EncodingHelpers to make things nice friendly for both Java and
-		// C++
-		byte[] aaValue = EncodingHelpers.encodeString("aa:" + getLbts());
-		byte[] abValue = EncodingHelpers.encodeString("ab:" + getLbts());
-		byte[] acValue = EncodingHelpers.encodeString("ac:" + getLbts());
-
-		// get the handles
-		// this line gets the object class of the instance identified by the
-		// object instance the handle points to
-		int classHandle = rtiamb.getObjectClass(objectHandle);
-		int aaHandle = rtiamb.getAttributeHandle("aa", classHandle);
-		int abHandle = rtiamb.getAttributeHandle("ab", classHandle);
-		int acHandle = rtiamb.getAttributeHandle("ac", classHandle);
-
-		// put the values into the collection
-		attributes.add(aaHandle, aaValue);
-		attributes.add(abHandle, abValue);
-		attributes.add(acHandle, acValue);
-
-		// ////////////////////////
-		// do the actual update //
-		// ////////////////////////
-		rtiamb.updateAttributeValues(objectHandle, attributes, generateTag());
-
-		// note that if you want to associate a particular timestamp with the
-		// update. here we send another update, this time with a timestamp:
-		LogicalTime time = convertTime(fedamb.federateTime
-				+ fedamb.federateLookahead);
-		rtiamb.updateAttributeValues(objectHandle, attributes, generateTag(),
-				time);
 	}
 
 	/**

@@ -13,6 +13,7 @@ import hla.rti.FederationExecutionAlreadyExists;
 import hla.rti.FederationExecutionDoesNotExist;
 import hla.rti.InteractionClassNotDefined;
 import hla.rti.InvalidResignAction;
+import hla.rti.LogicalTime;
 import hla.rti.NameNotFound;
 import hla.rti.ObjectClassNotDefined;
 import hla.rti.OwnershipAcquisitionPending;
@@ -21,6 +22,8 @@ import hla.rti.RTIinternalError;
 import hla.rti.ResignAction;
 import hla.rti.RestoreInProgress;
 import hla.rti.SaveInProgress;
+import hla.rti.SuppliedAttributes;
+import hla.rti.jlc.EncodingHelpers;
 import hla.rti.jlc.RtiFactoryFactory;
 
 import java.io.BufferedReader;
@@ -290,5 +293,57 @@ public class GuiFederat extends Federat<GuiAmbasador> {
 	public void naPoczatek() throws CouldNotOpenFED, ErrorReadingFED,
 			RTIinternalError, ConcurrentAccessAttempted {
 		utworzFederacje();
+	}
+	
+	/**
+	 *
+	 * This method will update all the values of the given object instance. It
+	 * will set each of the values to be a string which is equal to the name of
+	 * the attribute plus the current time. eg "aa:10.0" if the time is 10.0.
+	 * <p/>
+	 * Note that we don't actually have to update all the attributes at once, we
+	 * could update them individually, in groups or not at all!
+	 */
+	//TODO do usunięcia na przyszłość
+	protected void updateAttributeValues(int objectHandle) throws RTIexception {
+		// /////////////////////////////////////////////
+		// create the necessary container and values //
+		// /////////////////////////////////////////////
+		// create the collection to store the values in, as you can see
+		// this is quite a lot of work
+		SuppliedAttributes attributes = RtiFactoryFactory.getRtiFactory()
+				.createSuppliedAttributes();
+
+		// generate the new values
+		// we use EncodingHelpers to make things nice friendly for both Java and
+		// C++
+		byte[] aaValue = EncodingHelpers.encodeString("aa:" + getLbts());
+		byte[] abValue = EncodingHelpers.encodeString("ab:" + getLbts());
+		byte[] acValue = EncodingHelpers.encodeString("ac:" + getLbts());
+
+		// get the handles
+		// this line gets the object class of the instance identified by the
+		// object instance the handle points to
+		int classHandle = rtiamb.getObjectClass(objectHandle);
+		int aaHandle = rtiamb.getAttributeHandle("aa", classHandle);
+		int abHandle = rtiamb.getAttributeHandle("ab", classHandle);
+		int acHandle = rtiamb.getAttributeHandle("ac", classHandle);
+
+		// put the values into the collection
+		attributes.add(aaHandle, aaValue);
+		attributes.add(abHandle, abValue);
+		attributes.add(acHandle, acValue);
+
+		// ////////////////////////
+		// do the actual update //
+		// ////////////////////////
+		rtiamb.updateAttributeValues(objectHandle, attributes, generateTag());
+
+		// note that if you want to associate a particular timestamp with the
+		// update. here we send another update, this time with a timestamp:
+		LogicalTime time = convertTime(fedamb.federateTime
+				+ fedamb.federateLookahead);
+		rtiamb.updateAttributeValues(objectHandle, attributes, generateTag(),
+				time);
 	}
 }
