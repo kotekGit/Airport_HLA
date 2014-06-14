@@ -2,7 +2,6 @@ package pl.edu.wat.wcy.mtsk.lotnisko.start;
 
 import hla.rti.RTIexception;
 import pl.edu.wat.wcy.mtsk.lotnisko.ambasadorzy.SamolotAmbasador;
-import pl.edu.wat.wcy.mtsk.lotnisko.federacje.GuiFederat;
 import pl.edu.wat.wcy.mtsk.lotnisko.federacje.SamolotFederat;
 
 /**

@@ -44,12 +44,6 @@ public class WiezaKontroliFederat extends Federat<WiezaKontroliAmbasador> {
 	}
 
 	@Override
-	public void odlaczSieOdFederacji() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
 	public void naKoniec() {
 		// TODO Auto-generated method stub
 		

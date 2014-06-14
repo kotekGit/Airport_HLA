@@ -7,8 +7,10 @@ import hla.rti.ErrorReadingFED;
 import hla.rti.FederateAlreadyExecutionMember;
 import hla.rti.FederateLoggingServiceCalls;
 import hla.rti.FederateNotExecutionMember;
+import hla.rti.FederateOwnsAttributes;
 import hla.rti.FederationExecutionDoesNotExist;
 import hla.rti.InteractionClassNotDefined;
+import hla.rti.InvalidResignAction;
 import hla.rti.LogicalTime;
 import hla.rti.LogicalTimeInterval;
 import hla.rti.NameNotFound;
@@ -17,6 +19,7 @@ import hla.rti.OwnershipAcquisitionPending;
 import hla.rti.RTIambassador;
 import hla.rti.RTIexception;
 import hla.rti.RTIinternalError;
+import hla.rti.ResignAction;
 import hla.rti.RestoreInProgress;
 import hla.rti.SaveInProgress;
 import hla.rti.SuppliedAttributes;
@@ -199,8 +202,6 @@ public abstract class Federat<T extends Ambasador> {
 
 	public abstract void usunZarejestrowaneObiekty();
 
-	public abstract void odlaczSieOdFederacji();
-
 	public abstract void naKoniec();
 
 	public abstract void poDolaczeniuDoFederacji();
@@ -264,6 +265,32 @@ public abstract class Federat<T extends Ambasador> {
 		odlaczSieOdFederacji();
 
 		naKoniec();
+	}
+
+	/**
+	 * 11. resign from the federation
+	 */
+	public void odlaczSieOdFederacji() {
+		try {
+			rtiamb.resignFederationExecution(ResignAction.NO_ACTION);
+		} catch (FederateOwnsAttributes e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (FederateNotExecutionMember e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (InvalidResignAction e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (RTIinternalError e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (ConcurrentAccessAttempted e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		log("Resigned from Federation");
+
 	}
 
 	/**

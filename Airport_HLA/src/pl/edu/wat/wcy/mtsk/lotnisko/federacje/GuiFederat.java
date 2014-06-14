@@ -257,32 +257,6 @@ public class GuiFederat extends Federat<GuiAmbasador> {
 		log("Deleted Object, handle=" + objectHandle);
 	}
 
-	/**
-	 * 11. resign from the federation
-	 */
-	@Override
-	public void odlaczSieOdFederacji() {
-		try {
-			rtiamb.resignFederationExecution(ResignAction.NO_ACTION);
-		} catch (FederateOwnsAttributes e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (FederateNotExecutionMember e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (InvalidResignAction e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (RTIinternalError e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (ConcurrentAccessAttempted e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		log("Resigned from Federation");
-
-	}
 
 	/**
 	 * 12. try and destroy the federation NOTE: we won't die if we can't do this
