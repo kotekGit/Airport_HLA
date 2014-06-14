@@ -2,7 +2,7 @@ package pl.edu.wat.wcy.mtsk.lotnisko.ambasadorzy;
 
 import org.portico.impl.hla13.types.DoubleTime;
 
-import pl.edu.wat.wcy.mtsk.lotnisko.federacje.Federat;
+import pl.edu.wat.wcy.mtsk.lotnisko.federaci.Federat;
 import hla.rti.ArrayIndexOutOfBounds;
 import hla.rti.EventRetractionHandle;
 import hla.rti.LogicalTime;

@@ -1,4 +1,4 @@
-package pl.edu.wat.wcy.mtsk.lotnisko.federacje;
+package pl.edu.wat.wcy.mtsk.lotnisko.federaci;
 
 import hla.rti.AttributeNotDefined;
 import hla.rti.ConcurrentAccessAttempted;
@@ -22,7 +22,6 @@ import hla.rti.RTIinternalError;
 import hla.rti.ResignAction;
 import hla.rti.RestoreInProgress;
 import hla.rti.SaveInProgress;
-import hla.rti.SuppliedAttributes;
 import hla.rti.SuppliedParameters;
 import hla.rti.jlc.EncodingHelpers;
 import hla.rti.jlc.RtiFactoryFactory;
@@ -258,7 +257,7 @@ public abstract class Federat<T extends Ambasador> {
 		// tell the RTI we are ready to move past the sync point and then wait
 		// until the federation has synchronized on
 		rtiamb.synchronizationPointAchieved(READY_TO_RUN);
-		log("Osiągnięto punkt synchronizacji. Gotowy do uruchomienia. "
+		log("Osignięto punkt synchronizacji. Gotowy do uruchomienia. "
 				+ READY_TO_RUN + ", waiting for federation...");
 
 		czekajNaSynchronizacjeFederacji();

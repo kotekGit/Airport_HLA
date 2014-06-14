@@ -1,7 +1,7 @@
 package pl.edu.wat.wcy.mtsk.lotnisko.start;
 
 import pl.edu.wat.wcy.mtsk.lotnisko.ambasadorzy.GuiAmbasador;
-import pl.edu.wat.wcy.mtsk.lotnisko.federacje.GuiFederat;
+import pl.edu.wat.wcy.mtsk.lotnisko.federaci.GuiFederat;
 import hla.rti.RTIexception;
 
 /**

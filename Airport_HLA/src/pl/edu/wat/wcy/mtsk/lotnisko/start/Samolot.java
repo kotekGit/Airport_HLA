@@ -2,7 +2,7 @@ package pl.edu.wat.wcy.mtsk.lotnisko.start;
 
 import hla.rti.RTIexception;
 import pl.edu.wat.wcy.mtsk.lotnisko.ambasadorzy.SamolotAmbasador;
-import pl.edu.wat.wcy.mtsk.lotnisko.federacje.SamolotFederat;
+import pl.edu.wat.wcy.mtsk.lotnisko.federaci.SamolotFederat;
 
 /**
  * Uruchomienie federacji samolotu

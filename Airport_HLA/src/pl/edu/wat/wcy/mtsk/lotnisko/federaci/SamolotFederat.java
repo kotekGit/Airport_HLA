@@ -1,4 +1,4 @@
-package pl.edu.wat.wcy.mtsk.lotnisko.federacje;
+package pl.edu.wat.wcy.mtsk.lotnisko.federaci;
 
 import hla.rti.AttributeHandleSet;
 import hla.rti.AttributeNotDefined;
@@ -23,6 +23,11 @@ import hla.rti.jlc.EncodingHelpers;
 import hla.rti.jlc.RtiFactoryFactory;
 import pl.edu.wat.wcy.mtsk.lotnisko.ambasadorzy.SamolotAmbasador;
 
+/**
+ * Federat samolotu
+ * 
+ * @since 14.06.2014
+ */
 public class SamolotFederat extends Federat<SamolotAmbasador> {
 
 	private int uchwytDoObiektu;
@@ -62,7 +67,7 @@ public class SamolotFederat extends Federat<SamolotAmbasador> {
 			for (int i = 0; i < ITERATIONS; i++) {
 				// 9.1 update the attribute values of the instance //
 				byte[] a = aktualizuj(uchwytDoObiektu);
-				System.out.println("Zwrócono: " + a); 
+				System.out.println("Zwrï¿½cono: " + a); 
 				// 9.2 send an interaction
 				//sendInteraction();
 

@@ -1,14 +1,17 @@
-package pl.edu.wat.wcy.mtsk.lotnisko.federacje;
+package pl.edu.wat.wcy.mtsk.lotnisko.federaci;
 
 import hla.rti.ConcurrentAccessAttempted;
 import hla.rti.CouldNotOpenFED;
 import hla.rti.ErrorReadingFED;
 import hla.rti.RTIinternalError;
-import pl.edu.wat.wcy.mtsk.lotnisko.ambasadorzy.StacjaMeteorologicznaAmbasador;
+import pl.edu.wat.wcy.mtsk.lotnisko.ambasadorzy.WiezaKontroliAmbasador;
 
-public class StacjaMeteorologicznaFederacja extends Federat<StacjaMeteorologicznaAmbasador> {
+/**
+ * @since 14.06.2014
+ */
+public class WiezaKontroliFederat extends Federat<WiezaKontroliAmbasador> {
 
-	public StacjaMeteorologicznaFederacja(String nazwa) {
+	public WiezaKontroliFederat(String nazwa) {
 		super(nazwa);
 		// TODO Auto-generated constructor stub
 	}

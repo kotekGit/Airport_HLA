@@ -1,7 +1,5 @@
 /**
- * 
- */
-/**
+ * Pakiet z klasami do uruchamiania federatów.
  * @author mariusz
  *
  */

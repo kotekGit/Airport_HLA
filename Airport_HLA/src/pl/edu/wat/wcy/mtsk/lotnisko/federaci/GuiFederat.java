@@ -1,4 +1,4 @@
-package pl.edu.wat.wcy.mtsk.lotnisko.federacje;
+package pl.edu.wat.wcy.mtsk.lotnisko.federaci;
 
 import hla.rti.AttributeHandleSet;
 import hla.rti.AttributeNotDefined;
@@ -7,19 +7,16 @@ import hla.rti.CouldNotOpenFED;
 import hla.rti.ErrorReadingFED;
 import hla.rti.FederateLoggingServiceCalls;
 import hla.rti.FederateNotExecutionMember;
-import hla.rti.FederateOwnsAttributes;
 import hla.rti.FederatesCurrentlyJoined;
 import hla.rti.FederationExecutionAlreadyExists;
 import hla.rti.FederationExecutionDoesNotExist;
 import hla.rti.InteractionClassNotDefined;
-import hla.rti.InvalidResignAction;
 import hla.rti.LogicalTime;
 import hla.rti.NameNotFound;
 import hla.rti.ObjectClassNotDefined;
 import hla.rti.OwnershipAcquisitionPending;
 import hla.rti.RTIexception;
 import hla.rti.RTIinternalError;
-import hla.rti.ResignAction;
 import hla.rti.RestoreInProgress;
 import hla.rti.SaveInProgress;
 import hla.rti.SuppliedAttributes;
@@ -34,6 +31,10 @@ import java.net.MalformedURLException;
 import pl.edu.wat.wcy.mtsk.lotnisko.Utils;
 import pl.edu.wat.wcy.mtsk.lotnisko.ambasadorzy.GuiAmbasador;
 
+/**
+ * Federat gui
+ * @since 14.06.2014
+ */
 public class GuiFederat extends Federat<GuiAmbasador> {
 
 	private String plikFederacji;
@@ -58,11 +59,11 @@ public class GuiFederat extends Federat<GuiAmbasador> {
 			File fom = new File(plikFederacji);
 			rtiamb.createFederationExecution(Utils.NAZWA_FEDERACJI, fom.toURI()
 					.toURL());
-			log("Created Federation");
+			log("Federacja " + Utils.NAZWA_FEDERACJI + " utworzona");
 		} catch (FederationExecutionAlreadyExists exists) {
-			log("Didn't create federation, it already existed");
+			log("Nie można utworzyć federacji " + Utils.NAZWA_FEDERACJI + "ponieważ już istnieje");
 		} catch (MalformedURLException urle) {
-			log("Exception processing fom: " + urle.getMessage());
+			log("Błąd przetwarzania pliku fom: " + urle.getMessage());
 			urle.printStackTrace();
 			return;
 		}
@@ -76,7 +77,7 @@ public class GuiFederat extends Federat<GuiAmbasador> {
 	 * was, you have time to start other federates.
 	 */
 	protected void czekajNaFederatow() {
-		log(" >>>>>>>>>> Press Enter to Continue <<<<<<<<<<");
+		log(" >>>>>>>>>> Naciśnij Enter, aby kontynuować <<<<<<<<<<");
 		BufferedReader reader = new BufferedReader(new InputStreamReader(
 				System.in));
 		try {
@@ -169,7 +170,7 @@ public class GuiFederat extends Federat<GuiAmbasador> {
 			OwnershipAcquisitionPending, SaveInProgress, RestoreInProgress,
 			ConcurrentAccessAttempted, InteractionClassNotDefined,
 			FederateLoggingServiceCalls {
-		// TODO Auto-generated method stub
+		
 		// get all the handle information for the attributes of ObjectRoot.A
 		int classHandle = rtiamb.getObjectClassHandle("ObjectRoot.A");
 		int aaHandle = rtiamb.getAttributeHandle("aa", classHandle);
@@ -247,7 +248,7 @@ public class GuiFederat extends Federat<GuiAmbasador> {
 	}
 
 	/**
-	 * 10. delete the object we created
+	 * Usunięcie stworzonych obiektów
 	 */
 	@Override
 	public void usunZarejestrowaneObiekty() {
@@ -270,9 +271,9 @@ public class GuiFederat extends Federat<GuiAmbasador> {
 	public void naKoniec() {
 		try {
 			rtiamb.destroyFederationExecution(Utils.NAZWA_FEDERACJI);
-			log("Destroyed Federation");
+			log("Usunięto federacje " + Utils.NAZWA_FEDERACJI);
 		} catch (FederationExecutionDoesNotExist dne) {
-			log("No need to destroy federation, it doesn't exist");
+			log("Nie można usunąć federacji " + Utils.NAZWA_FEDERACJI + ", ponieważ już istnieje");
 		} catch (FederatesCurrentlyJoined fcj) {
 			log("Didn't destroy federation, federates still joined");
 		} catch (RTIinternalError e) {
@@ -296,7 +297,6 @@ public class GuiFederat extends Federat<GuiAmbasador> {
 	}
 	
 	/**
-	 *
 	 * This method will update all the values of the given object instance. It
 	 * will set each of the values to be a string which is equal to the name of
 	 * the attribute plus the current time. eg "aa:10.0" if the time is 10.0.
