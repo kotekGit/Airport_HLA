@@ -1,5 +1,5 @@
 package pl.edu.wat.wcy.mtsk.lotnisko.ambasadorzy;
 
-public class WiezaKontroliAmbasador extends Abasador {
+public class WiezaKontroliAmbasador extends Ambasador {
 
 }

@@ -1,5 +1,5 @@
 package pl.edu.wat.wcy.mtsk.lotnisko.ambasadorzy;
 
-public class SamolotAmbasador extends Abasador {
+public class SamolotAmbasador extends Ambasador {
 
 }
