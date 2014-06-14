@@ -63,18 +63,26 @@ public abstract class Federat<T extends Ambasador> {
 	// ----------------------------------------------------------
 	// INSTANCE METHODS
 	// ----------------------------------------------------------
-
-
+	
+	/**
+	 * Dołączenie do federacji
+	 * 
+	 * @param nazwaFederacji
+	 * @param ambasador
+	 * @throws FederateAlreadyExecutionMember
+	 * @throws FederationExecutionDoesNotExist
+	 * @throws SaveInProgress
+	 * @throws RestoreInProgress
+	 * @throws RTIinternalError
+	 * @throws ConcurrentAccessAttempted
+	 * @throws FederateNotExecutionMember
+	 */
 	public void dolaczDoFederacji(String nazwaFederacji, T ambasador)
 			throws FederateAlreadyExecutionMember,
 			FederationExecutionDoesNotExist, SaveInProgress, RestoreInProgress,
 			RTIinternalError, ConcurrentAccessAttempted,
 			FederateNotExecutionMember {
-		// //////////////////////////
-		// 3. join the federation //
-		// //////////////////////////
-		// create the federate ambassador and join the federation
-
+		
 		fedamb = ambasador;
 		rtiamb.joinFederationExecution(nazwaFederata, nazwaFederacji, fedamb);
 		log("Dołączono do federacji: " + nazwaFederacji);
@@ -168,6 +176,7 @@ public abstract class Federat<T extends Ambasador> {
 
 	/**
 	 * Rozpoczyna publikację.
+	 * 
 	 * @throws RTIinternalError 
 	 * @throws FederateNotExecutionMember 
 	 * @throws NameNotFound 
@@ -183,6 +192,7 @@ public abstract class Federat<T extends Ambasador> {
 
 	/**
 	 * Rozpoczyna subskrybcję.
+	 * 
 	 * @throws ConcurrentAccessAttempted 
 	 * @throws RestoreInProgress 
 	 * @throws SaveInProgress 
@@ -197,14 +207,30 @@ public abstract class Federat<T extends Ambasador> {
 	 */
 	public abstract void zainicjujSubskrybcje() throws NameNotFound, FederateNotExecutionMember, RTIinternalError, ObjectClassNotDefined, AttributeNotDefined, OwnershipAcquisitionPending, SaveInProgress, RestoreInProgress, ConcurrentAccessAttempted, InteractionClassNotDefined, FederateLoggingServiceCalls;
 
+	/**
+	 * Metoda głównego zadania federata.
+	 */
 	public abstract void uruchom();
 
+	/**
+	 * Metoda do rejestrowania obiektów.
+	 */
 	public abstract void zarejestrujObiekty();
 
+	/**
+	 * Metoda do utylizacji zarejestrowanych obiektów.
+	 */
 	public abstract void usunZarejestrowaneObiekty();
 
+	/**
+	 * Metoda odpalana przed końcem działania federata.
+	 */
 	public abstract void naKoniec();
 
+	/**
+	 * Metoda odpalana po dołączeniu federata do federacji.
+	 * 
+	 */
 	public abstract void poDolaczeniuDoFederacji();
 
 	public abstract void naPoczatek() throws CouldNotOpenFED, ErrorReadingFED,
@@ -218,9 +244,7 @@ public abstract class Federat<T extends Ambasador> {
 	 * see the class level comments
 	 */
 	public void runFederate(T ambasador) throws RTIexception {
-		// ///////////////////////////////
-		// 1. create the RTIambassador //
-		// ///////////////////////////////
+		// 1. create the RTIambassador
 		rtiamb = RtiFactoryFactory.getRtiFactory().createRtiAmbassador();
 
 		naPoczatek();
@@ -229,9 +253,7 @@ public abstract class Federat<T extends Ambasador> {
 
 		poDolaczeniuDoFederacji();
 
-		// /////////////////////////////////////////////////////
-		// 5. achieve the point and wait for synchronization //
-		// /////////////////////////////////////////////////////
+		// 5. achieve the point and wait for synchronization
 		// tell the RTI we are ready to move past the sync point and then wait
 		// until the federation has synchronized on
 		rtiamb.synchronizationPointAchieved(READY_TO_RUN);
@@ -239,7 +261,7 @@ public abstract class Federat<T extends Ambasador> {
 				+ READY_TO_RUN + ", waiting for federation...");
 
 		czekajNaSynchronizacjeFederacji();
-		// ///////////////////////////
+		
 		// 6. enable time policies //
 		// ///////////////////////////
 		// in this section we enable/disable all time policies
@@ -269,7 +291,7 @@ public abstract class Federat<T extends Ambasador> {
 	}
 
 	/**
-	 * 11. resign from the federation
+	 * Odłączenie federata z federacji.
 	 */
 	public void odlaczSieOdFederacji() {
 		try {
