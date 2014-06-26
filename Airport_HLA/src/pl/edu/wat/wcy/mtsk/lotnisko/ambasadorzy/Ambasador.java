@@ -231,10 +231,11 @@ public abstract class Ambasador<T extends Federat<Ambasador>> extends NullFedera
 				}
 				catch( ArrayIndexOutOfBounds aioob )
 				{
+					log(aioob.getMessage());
 					// won't happen
 				}
 			}
-
+			this.pobierzInterakcje(interactionClass, theInteraction, tag, theTime, eventRetractionHandle);
 			log( builder.toString() );
 		}
 
