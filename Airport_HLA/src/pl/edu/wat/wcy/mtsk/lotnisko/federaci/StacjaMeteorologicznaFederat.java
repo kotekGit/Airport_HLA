@@ -21,6 +21,8 @@ import hla.rti.SuppliedAttributes;
 import hla.rti.SuppliedParameters;
 import hla.rti.jlc.EncodingHelpers;
 import hla.rti.jlc.RtiFactoryFactory;
+import pl.edu.wat.wcy.mtsk.lotnisko.Utils;
+import pl.edu.wat.wcy.mtsk.lotnisko.pomocnicy.ThreadPomocnik;
 
 public class StacjaMeteorologicznaFederat extends Federat {
 
@@ -67,12 +69,7 @@ public class StacjaMeteorologicznaFederat extends Federat {
 
 		try {
 			while (true) {
-				try {
-					Thread.sleep(3000);
-				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
+				ThreadPomocnik.spij(Utils.CZAS_SPANIA);
 				// aktualizacja atrybutu
 				// byte[] a = aktualizuj(uchwytDoObiektu);
 				// System.out.println("Zwrócono: " + a);

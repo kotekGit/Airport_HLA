@@ -6,23 +6,27 @@ package pl.edu.wat.wcy.mtsk.lotnisko.pomocnicy;
  */
 public class SamolotPomocnik {
     
-    private int numerLinni;
-    /**
-     * Prośba o lądowanie / start / ...
-     */
-    private String prosba;
+    private int idSamolotu;
+    private int zezwolenie;
+    private int polozenie;
     
     
-    public int getNumerLinni() {
-        return numerLinni;
+    public int getIdSamolotu() {
+        return idSamolotu;
     }
-    public void setNumerLinni(int numerLinni) {
-        this.numerLinni = numerLinni;
+    public void setIdSamolotu(int idSamolotu) {
+        this.idSamolotu = idSamolotu;
     }
-    public String getProsba() {
-        return prosba;
+    public int getZezwolenie() {
+        return zezwolenie;
     }
-    public void setProsba(String prosba) {
-        this.prosba = prosba;
-    } 
+    public void setZezwolenie(int zezwolenie) {
+        this.zezwolenie = zezwolenie;
+    }
+    public int getPolozenie() {
+        return polozenie;
+    }
+    public void setPolozenie(int polozenie) {
+        this.polozenie = polozenie;
+    }
 }

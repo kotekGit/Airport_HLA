@@ -31,6 +31,7 @@ import java.net.MalformedURLException;
 import java.util.ArrayList;
 
 import pl.edu.wat.wcy.mtsk.lotnisko.Utils;
+import pl.edu.wat.wcy.mtsk.lotnisko.pomocnicy.ThreadPomocnik;
 
 /**
  * Federat gui
@@ -230,12 +231,7 @@ public class GuiFederat extends Federat {
 					e.printStackTrace();
 				}
 				log("Time Advanced to " + fedamb.federateTime);
-				try {
-					Thread.sleep(3000);
-				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
+				ThreadPomocnik.spij(Utils.CZAS_SPANIA);
 			}
 	}
 

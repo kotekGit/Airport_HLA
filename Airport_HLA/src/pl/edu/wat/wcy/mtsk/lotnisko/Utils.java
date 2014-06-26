@@ -8,4 +8,6 @@ public class Utils {
 	public static final String NAZWA_FEDERACJI = "JEDYNAKI";
 	
 	public static final String PLIK_FOM = "resources/lotnisko.fed";
+	
+	public static final long CZAS_SPANIA = 3000;
 }

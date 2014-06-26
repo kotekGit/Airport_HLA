@@ -5,7 +5,8 @@ public class StacjaMeteorologicznaPomocnik {
     private double silaWiatru;
     private double temperatura;
     private double wilgotnosc;
-    private String zachmurzenie;
+    private double zachmurzenie;
+    private double cisnienie;
     
     
     public double getSilaWiatru() {
@@ -26,10 +27,16 @@ public class StacjaMeteorologicznaPomocnik {
     public void setWilgotnosc(double wilgotnosc) {
         this.wilgotnosc = wilgotnosc;
     }
-    public String getZachmurzenie() {
+    public double getZachmurzenie() {
         return zachmurzenie;
     }
-    public void setZachmurzenie(String zachmurzenie) {
+    public void setZachmurzenie(double zachmurzenie) {
         this.zachmurzenie = zachmurzenie;
+    }
+    public double getCisnienie() {
+	return cisnienie;
+    }
+    public void setCisnienie(double cisnienie) {
+	this.cisnienie = cisnienie;
     }
 }
