@@ -14,15 +14,9 @@
     (class ObjectRoot 
       (attribute privilegeToDelete reliable timestamp)
       (class RTIprivate)
-      (class A
-        (attribute aa reliable timestamp TestSpace) ;; more comments!
-        (attribute ab reliable timestamp TestSpace)
-        (attribute ac reliable timestamp TestSpace)
-        (class B
-	        (attribute ba reliable timestamp TestSpace)
-	        (attribute bb reliable timestamp TestSpace)
-	        (attribute bc reliable timestamp TestSpace)
-        )
+      (class Symulacja
+        (attribute StanSumulacji reliable timestamp TestSpace) ;; more comments!
+        (attribute ZajestoscPasow reliable timestamp TestSpace)
       )
     )
   )
@@ -31,8 +25,20 @@
       (class RTIprivate reliable timestamp)
       (class StacjaMeterologiczna reliable timestamp TestSpace
         (parameter SilaWiatru)
-        (parameter Temperatura)
         (parameter Zachmurzenie)
+        (parameter Temperatura)
+        (parameter Wilgotnosc)
+        (parameter Cisnienie)
+      )
+      (class Samolot reliable timestamp TestSpace
+        (parameter IdSamolotu)
+        (parameter Zezwolenie)
+        (parameter Polozenie)
+      )
+      (class WiezaKontroliLotow reliable timestamp TestSpace
+        (parameter Decyzja)
+        (parameter IdSamolotu)
+        (parameter NumerPasu)
       )
     )
   )
