@@ -217,23 +217,22 @@ public class GuiFederat extends Federat<GuiAmbasador> {
 		// here is where we do the meat of our work. in each iteration, we will
 		// update the attribute values of the object we registered, and will
 		// send an interaction.
-
-		try {
-			for (int i = 0; i < ITERATIONS; i++) {
+			while(true){
 				// 9.1 update the attribute values of the instance //
-				updateAttributeValues(objectHandle);
+				//updateAttributeValues(objectHandle);
 
 				// 9.2 send an interaction
-				wyslijInterakcje();
+				//wyslijInterakcje();
 
 				// 9.3 request a time advance and wait until we get it
-				advanceTime(1.0);
+				try {
+					advanceTime(1.0);
+				} catch (RTIexception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 				log("Time Advanced to " + fedamb.federateTime);
 			}
-		} catch (RTIexception exc) {
-			exc.printStackTrace();
-		}
-
 	}
 
 	@Override
@@ -242,13 +241,13 @@ public class GuiFederat extends Federat<GuiAmbasador> {
 		// 8. register an object to update //
 		// ///////////////////////////////////
 
-		try {
+/*		try {
 			objectHandle = zarejestrujObjekt("ObjectRoot.A");
 		} catch (RTIexception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		log("Registered Object, handle=" + objectHandle);
+		log("Registered Object, handle=" + objectHandle);*/
 
 	}
 
@@ -257,13 +256,13 @@ public class GuiFederat extends Federat<GuiAmbasador> {
 	 */
 	@Override
 	public void usunZarejestrowaneObiekty() {
-		try {
+/*		try {
 			usunObjekt(objectHandle);
 		} catch (RTIexception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		log("Deleted Object, handle=" + objectHandle);
+		log("Deleted Object, handle=" + objectHandle);*/
 	}
 
 
@@ -363,7 +362,7 @@ public class GuiFederat extends Federat<GuiAmbasador> {
 			stacjaMetWartosci.add(silaaWiatru);
 			stacjaMetWartosci.add(temperatura);
 			stacjaMetWartosci.add(zachmuerzenie);
-			System.out.println("Otrzymano dane z interakcji");
+			System.out.println("Otrzymano dane z interakcji, zachmuerzenie: " +zachmuerzenie);
 		} catch (NumberFormatException | ArrayIndexOutOfBounds e) {
 			// TODO Auto-generated catch block
 			System.out.println("Nie udalo sie pobrac wartosci");
