@@ -12,3 +12,4 @@
 hs_err_pid*
 /target/
 /Airport_HLA/*.classpath
+/Airport_HLA/logs/portico.log
