@@ -7,8 +7,8 @@ package pl.edu.wat.wcy.mtsk.lotnisko.pomocnicy;
 public class WierzaKontrolnaPomocnik {
 
     private int numerPasu;
-    private boolean czyMozeLadowac;
-    
+    private int decyzja;
+    private int idSamolotu;
     
     public int getNumerPasu() {
         return numerPasu;
@@ -16,12 +16,17 @@ public class WierzaKontrolnaPomocnik {
     public void setNumerPasu(int numerPasu) {
         this.numerPasu = numerPasu;
     }
-    public boolean isCzyMozeLadowac() {
-        return czyMozeLadowac;
+    public int getDecyzja() {
+        return decyzja;
     }
-    public void setCzyMozeLadowac(boolean czyMozeLadowac) {
-        this.czyMozeLadowac = czyMozeLadowac;
+    public void setDecyzja(int decyzja) {
+        this.decyzja = decyzja;
     }
-    
+    public int getIdSamolotu() {
+        return idSamolotu;
+    }
+    public void setIdSamolotu(int idSamolotu) {
+        this.idSamolotu = idSamolotu;
+    }
     
 }
