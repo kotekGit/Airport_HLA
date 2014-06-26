@@ -371,4 +371,10 @@ public class GuiFederat extends Federat<GuiAmbasador> {
 		}
 		
 	}
+
+	@Override
+	protected void wyslijInterakcje() throws RTIexception {
+		// TODO Auto-generated method stub
+		
+	}
 }

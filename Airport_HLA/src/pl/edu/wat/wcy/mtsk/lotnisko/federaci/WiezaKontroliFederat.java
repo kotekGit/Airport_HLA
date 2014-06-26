@@ -79,21 +79,10 @@ public class WiezaKontroliFederat extends Federat<WiezaKontroliAmbasador> {
 		// TODO Auto-generated method stub
 		
 	}
+
 	@Override
 	protected void wyslijInterakcje() throws RTIexception {
 		// TODO Auto-generated method stub
 		
-	}<<<<<<< .mine
-			LogicalTime time) {
-		// TODO Auto-generated method stub
-		
 	}
-
-=======
-		// TODO Auto-generated method stub
-		
-	}
-
-
->>>>>>> .theirs
 }
