@@ -1,5 +1,6 @@
 package pl.edu.wat.wcy.mtsk.lotnisko.federaci;
 
+import hla.rti.ArrayIndexOutOfBounds;
 import hla.rti.AttributeHandleSet;
 import hla.rti.AttributeNotDefined;
 import hla.rti.ConcurrentAccessAttempted;
@@ -17,6 +18,7 @@ import hla.rti.ObjectClassNotDefined;
 import hla.rti.OwnershipAcquisitionPending;
 import hla.rti.RTIexception;
 import hla.rti.RTIinternalError;
+import hla.rti.ReceivedInteraction;
 import hla.rti.RestoreInProgress;
 import hla.rti.SaveInProgress;
 import hla.rti.SuppliedAttributes;
@@ -27,6 +29,7 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.InputStreamReader;
 import java.net.MalformedURLException;
+import java.util.ArrayList;
 
 import pl.edu.wat.wcy.mtsk.lotnisko.Utils;
 import pl.edu.wat.wcy.mtsk.lotnisko.ambasadorzy.GuiAmbasador;
@@ -39,9 +42,11 @@ public class GuiFederat extends Federat<GuiAmbasador> {
 
 	private String plikFederacji;
 	int objectHandle;
-
+	ArrayList<Double> stacjaMetWartosci;
+	
 	public GuiFederat(String nazwa) {
 		super(nazwa);
+		stacjaMetWartosci = new ArrayList<Double>();
 
 		plikFederacji = Utils.PLIK_FOM;
 	}
@@ -172,28 +177,28 @@ public class GuiFederat extends Federat<GuiAmbasador> {
 			FederateLoggingServiceCalls {
 		
 		// get all the handle information for the attributes of ObjectRoot.A
-		int classHandle = rtiamb.getObjectClassHandle("ObjectRoot.A");
+/*		int classHandle = rtiamb.getObjectClassHandle("ObjectRoot.A");
 		int aaHandle = rtiamb.getAttributeHandle("aa", classHandle);
 		int abHandle = rtiamb.getAttributeHandle("ab", classHandle);
-		int acHandle = rtiamb.getAttributeHandle("ac", classHandle);
+		int acHandle = rtiamb.getAttributeHandle("ac", classHandle);*/
 
 		// package the information into a handle set
-		AttributeHandleSet attributes = RtiFactoryFactory.getRtiFactory()
+/*		AttributeHandleSet attributes = RtiFactoryFactory.getRtiFactory()
 				.createAttributeHandleSet();
 		attributes.add(aaHandle);
 		attributes.add(abHandle);
 		attributes.add(acHandle);
-
+*/
 		// ///////////////////////////////////////////////
 		// subscribe to all attributes of ObjectRoot.A //
 		// ///////////////////////////////////////////////
 		// we also want to hear about the same sort of information as it is
 		// created and altered in other federates, so we need to subscribe to it
 
-		rtiamb.subscribeObjectClassAttributes(classHandle, attributes);
+/*		rtiamb.subscribeObjectClassAttributes(classHandle, attributes);*/
 
 		int interactionHandle = rtiamb
-				.getInteractionClassHandle("InteractionRoot.X");
+				.getInteractionClassHandle("StacjaMeterologiczna");
 
 		// //////////////////////////////////////////////////
 		// subscribe to the InteractionRoot.X interaction //
@@ -345,5 +350,25 @@ public class GuiFederat extends Federat<GuiAmbasador> {
 				+ fedamb.federateLookahead);
 		rtiamb.updateAttributeValues(objectHandle, attributes, generateTag(),
 				time);
+	}
+
+	@Override
+	public void przeniesInterakcje(ReceivedInteraction otrzymanaInterakcja,
+			LogicalTime time) {
+		//pobranie danych ze stacji 
+		try {
+			Double silaaWiatru = Double.parseDouble(EncodingHelpers.decodeString(otrzymanaInterakcja.getValue(0)));
+			Double temperatura = Double.parseDouble(EncodingHelpers.decodeString(otrzymanaInterakcja.getValue(1)));
+			Double zachmuerzenie = Double.parseDouble(EncodingHelpers.decodeString(otrzymanaInterakcja.getValue(2)));
+			stacjaMetWartosci.add(silaaWiatru);
+			stacjaMetWartosci.add(temperatura);
+			stacjaMetWartosci.add(zachmuerzenie);
+			System.out.println("Otrzymano dane z interakcji");
+		} catch (NumberFormatException | ArrayIndexOutOfBounds e) {
+			// TODO Auto-generated catch block
+			System.out.println("Nie udalo sie pobrac wartosci");
+			e.printStackTrace();
+		}
+		
 	}
 }

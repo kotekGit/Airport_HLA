@@ -16,7 +16,7 @@ import hla.rti.jlc.NullFederateAmbassador;
  * @since 16.06.2014
  *
  */
-public abstract class Ambasador extends NullFederateAmbassador {
+public abstract class Ambasador<T extends Federat<Ambasador>> extends NullFederateAmbassador {
 	//----------------------------------------------------------
 		//                    STATIC VARIABLES
 		//----------------------------------------------------------
@@ -35,6 +35,8 @@ public abstract class Ambasador extends NullFederateAmbassador {
 		public boolean isAnnounced        = false;
 		public boolean isReadyToRun       = false;
 
+	    Federat<Ambasador> federat;
+	    
 		//----------------------------------------------------------
 		//                      CONSTRUCTORS
 		//----------------------------------------------------------
@@ -42,6 +44,17 @@ public abstract class Ambasador extends NullFederateAmbassador {
 		{
 		}
 
+		/**
+		 * Pobieranie interakcji przez ambsadora. Każdy ambasador powinien implementować
+		 * handlera dla swoich interakcji.
+		 * @param klasaInterakcji
+		 * @param otrzymanaInterakcja
+		 * @param tag
+		 * @param time
+		 * @param eventRetractionHandle
+		 */
+		public abstract void pobierzInterakcje(int klasaInterakcji, ReceivedInteraction otrzymanaInterakcja, byte[] tag, LogicalTime time, EventRetractionHandle eventRetractionHandle);
+		
 		//----------------------------------------------------------
 		//                    INSTANCE METHODS
 		//----------------------------------------------------------
@@ -242,4 +255,7 @@ public abstract class Ambasador extends NullFederateAmbassador {
 		//----------------------------------------------------------
 		//                     STATIC METHODS
 		//----------------------------------------------------------
+
+		
+		
 }
