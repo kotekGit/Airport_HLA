@@ -9,7 +9,7 @@ package pl.edu.wat.wcy.mtsk.lotnisko.pomocnicy;
  */
 public class ThreadPomocnik {
     
-    public static void spij(int czas) {
+    public static void spij(long czas) {
 	try {
 	    Thread.sleep(czas);
 	} catch (InterruptedException e) {
