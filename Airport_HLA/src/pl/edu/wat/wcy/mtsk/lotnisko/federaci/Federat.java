@@ -25,6 +25,7 @@ import hla.rti.RestoreInProgress;
 import hla.rti.SaveInProgress;
 import hla.rti.jlc.RtiFactoryFactory;
 
+import org.apache.log4j.Logger;
 import org.portico.impl.hla13.types.DoubleTime;
 import org.portico.impl.hla13.types.DoubleTimeInterval;
 
@@ -292,13 +293,19 @@ public abstract class Federat<T extends Ambasador> implements Runnable {
 		// in this section we tell the RTI of all the data we are going to
 		// produce, and all the data we want to know about
 		zainicjujPublikacje();
+		log("Zarejestrowano na publickacje");
 		zainicjujSubskrybcje();
-		log("Published and Subscribed");
+		log("Zarejestrowano na subskrypcje");
 
 		zarejestrujObiekty();
 
 		// uruchomienie głównej pętli federata
-		this.run();
+		try {
+			this.run();
+		}
+		catch(Exception exc) {
+			Logger.getLogger(Federat.class.getName()).error(nazwaFederata + " - Nieoczekiwane zakończenie pracy federata");;
+		}
 
 		usunZarejestrowaneObiekty();
 

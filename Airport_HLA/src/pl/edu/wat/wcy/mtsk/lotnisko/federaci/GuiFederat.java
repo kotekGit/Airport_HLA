@@ -232,6 +232,12 @@ public class GuiFederat extends Federat<GuiAmbasador> {
 					e.printStackTrace();
 				}
 				log("Time Advanced to " + fedamb.federateTime);
+				try {
+					Thread.sleep(3000);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			}
 	}
 
