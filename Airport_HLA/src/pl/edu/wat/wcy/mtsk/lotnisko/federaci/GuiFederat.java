@@ -1,7 +1,6 @@
 package pl.edu.wat.wcy.mtsk.lotnisko.federaci;
 
 import hla.rti.ArrayIndexOutOfBounds;
-import hla.rti.AttributeHandleSet;
 import hla.rti.AttributeNotDefined;
 import hla.rti.ConcurrentAccessAttempted;
 import hla.rti.CouldNotOpenFED;
@@ -361,10 +360,10 @@ public class GuiFederat extends Federat {
 			LogicalTime time) {
 		//pobranie danych ze stacji 
 		try {
-			Double silaaWiatru = Double.parseDouble(EncodingHelpers.decodeString(otrzymanaInterakcja.getValue(0)));
+			Double silaWiatru = Double.parseDouble(EncodingHelpers.decodeString(otrzymanaInterakcja.getValue(0)));
 			Double temperatura = Double.parseDouble(EncodingHelpers.decodeString(otrzymanaInterakcja.getValue(1)));
 			Double zachmuerzenie = Double.parseDouble(EncodingHelpers.decodeString(otrzymanaInterakcja.getValue(2)));
-			stacjaMetWartosci.add(silaaWiatru);
+			stacjaMetWartosci.add(silaWiatru);
 			stacjaMetWartosci.add(temperatura);
 			stacjaMetWartosci.add(zachmuerzenie);
 			System.out.println("Otrzymano dane z interakcji, zachmuerzenie: " +zachmuerzenie);

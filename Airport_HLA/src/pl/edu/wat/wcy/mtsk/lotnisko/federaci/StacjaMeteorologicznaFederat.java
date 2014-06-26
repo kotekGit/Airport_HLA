@@ -193,12 +193,9 @@ public class StacjaMeteorologicznaFederat extends Federat {
 
 		// przekodowanie wartości
 		// ewentualnie może być np coś takiego: "100.0".getBytes() zamiast encodeString
-		byte[] silaWiatruValue = EncodingHelpers.encodeString("SilaWiatru:"
-				+ getLbts());
-		byte[] temperaturaValue = EncodingHelpers.encodeString("Temperatura:"
-				+ getLbts());
-		byte[] zachmurzenieValue = EncodingHelpers.encodeString("Zachmurzenie:"
-				+ getLbts());
+		byte[] silaWiatruValue = EncodingHelpers.encodeString("" + getLbts());
+		byte[] temperaturaValue = EncodingHelpers.encodeString("" + getLbts());
+		byte[] zachmurzenieValue = EncodingHelpers.encodeString("" +getLbts());
 
 		// ustawienie wartości
 		parameters.add(silaWiatruUchwyt, silaWiatruValue);

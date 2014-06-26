@@ -25,10 +25,10 @@ public class GuiAmbasador extends Ambasador {
 			LogicalTime time, EventRetractionHandle eventRetractionHandle) {
 
 		System.out.println("Zmiana pogody na stacji meteorologicznej");
-		if (EncodingHelpers.decodeString(tag).equalsIgnoreCase(
-				"StacjaMeterologiczna")) {
+		//if (EncodingHelpers.decodeString(tag).equalsIgnoreCase(
+		//		"StacjaMeterologiczna")) {
 			federat.przeniesInterakcje(otrzymanaInterakcja, time);
-		}
+		//}
 	}
 
 }
