@@ -50,6 +50,7 @@ public class StacjaMeteorologicznaFederat extends
 			FederateNotExecutionMember, RTIinternalError,
 			ObjectClassNotDefined, AttributeNotDefined, SaveInProgress,
 			RestoreInProgress, ConcurrentAccessAttempted {
+	    
 		/*
 		 * uchwytDoObiektu = rtiamb.getObjectClassHandle("ObjectRoot.A");
 		 * uchwytDoObiektuDwa = rtiamb.getAttributeHandle("aa",
@@ -205,6 +206,7 @@ public class StacjaMeteorologicznaFederat extends
 				+ fedamb.federateLookahead);
 		rtiamb.sendInteraction(stacjaMeteorologinczaUchwyt, parameters,
 				generateTag(), time);
+		log("Wysłano statystyki pogodowe");
 	}
 
 	@Override
