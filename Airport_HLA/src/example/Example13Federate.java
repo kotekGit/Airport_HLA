@@ -521,7 +521,9 @@ public class Example13Federate
 		// LRC to start delivering callbacks to the federate
 		while( fedamb.isAdvancing )
 		{
-			rtiamb.tick();
+			
+		    System.out.println("TICK ***************************************");
+		    rtiamb.tick();
 		}
 	}
 
