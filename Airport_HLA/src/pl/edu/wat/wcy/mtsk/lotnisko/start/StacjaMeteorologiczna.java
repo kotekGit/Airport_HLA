@@ -18,7 +18,7 @@ public class StacjaMeteorologiczna {
 
 	try {
 	    new StacjaMeteorologicznaFederat(federateName)
-		    .runFederate(new StacjaMeteorologicznaAmbasador());
+		    .uruchom(new StacjaMeteorologicznaAmbasador());
 	} catch (RTIexception rtie) {
 	    rtie.printStackTrace();
 	}
