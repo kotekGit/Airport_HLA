@@ -140,7 +140,7 @@ public class GuiFederat extends Federat<GuiAmbasador> {
 		// that we intend to publish this information
 
 		// get all the handle information for the attributes of ObjectRoot.A
-		int classHandle = rtiamb.getObjectClassHandle("ObjectRoot.A");
+/*		int classHandle = rtiamb.getObjectClassHandle("ObjectRoot.A");
 		int aaHandle = rtiamb.getAttributeHandle("aa", classHandle);
 		int abHandle = rtiamb.getAttributeHandle("ab", classHandle);
 		int acHandle = rtiamb.getAttributeHandle("ac", classHandle);
@@ -165,7 +165,7 @@ public class GuiFederat extends Federat<GuiAmbasador> {
 				.getInteractionClassHandle("InteractionRoot.X");
 
 		// do the publication
-		rtiamb.publishInteractionClass(interactionHandle);
+		rtiamb.publishInteractionClass(interactionHandle);*/
 	}
 
 	@Override
