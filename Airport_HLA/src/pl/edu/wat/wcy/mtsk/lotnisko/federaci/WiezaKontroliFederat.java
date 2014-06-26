@@ -4,7 +4,8 @@ import hla.rti.ConcurrentAccessAttempted;
 import hla.rti.CouldNotOpenFED;
 import hla.rti.ErrorReadingFED;
 import hla.rti.RTIexception;
-import hla.rti.RTIinternalError;
+import hla.rti.LogicalTime;import hla.rti.RTIinternalError;
+import hla.rti.ReceivedInteraction;
 import pl.edu.wat.wcy.mtsk.lotnisko.ambasadorzy.WiezaKontroliAmbasador;
 
 /**
@@ -73,9 +74,15 @@ public class WiezaKontroliFederat extends Federat<WiezaKontroliAmbasador> {
 	}
 
 	@Override
-	protected void wyslijInterakcje() throws RTIexception {
+	public void przeniesInterakcje(ReceivedInteraction otrzymanaInterakcja,
+			LogicalTime time) {
 		// TODO Auto-generated method stub
 		
 	}
 
+	@Override
+	protected void wyslijInterakcje() throws RTIexception {
+		// TODO Auto-generated method stub
+		
+	}
 }

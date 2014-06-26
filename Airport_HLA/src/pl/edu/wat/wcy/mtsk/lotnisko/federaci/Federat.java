@@ -19,6 +19,7 @@ import hla.rti.OwnershipAcquisitionPending;
 import hla.rti.RTIambassador;
 import hla.rti.RTIexception;
 import hla.rti.RTIinternalError;
+import hla.rti.ReceivedInteraction;
 import hla.rti.ResignAction;
 import hla.rti.RestoreInProgress;
 import hla.rti.SaveInProgress;
@@ -253,6 +254,8 @@ public abstract class Federat<T extends Ambasador> implements Runnable {
 	 */
 	public abstract void uruchom();
 	
+	public abstract void przeniesInterakcje(ReceivedInteraction otrzymanaInterakcja, LogicalTime time);
+	
 	/**
 	 * This is the main simulation loop. It can be thought of as the main method
 	 * of the federate. For a description of the basic flow of this federate,
@@ -417,4 +420,6 @@ public abstract class Federat<T extends Ambasador> implements Runnable {
 	protected byte[] generateTag() {
 		return ("" + System.currentTimeMillis()).getBytes();
 	}
+	
+	
 }

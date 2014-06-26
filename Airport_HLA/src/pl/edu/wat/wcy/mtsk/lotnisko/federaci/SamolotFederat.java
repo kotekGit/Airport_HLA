@@ -16,6 +16,7 @@ import hla.rti.ObjectNotKnown;
 import hla.rti.OwnershipAcquisitionPending;
 import hla.rti.RTIexception;
 import hla.rti.RTIinternalError;
+import hla.rti.ReceivedInteraction;
 import hla.rti.RestoreInProgress;
 import hla.rti.SaveInProgress;
 import hla.rti.SuppliedAttributes;
@@ -156,6 +157,13 @@ public class SamolotFederat extends Federat<SamolotAmbasador> {
 
 	@Override
 	protected void wyslijInterakcje() throws RTIexception {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void przeniesInterakcje(ReceivedInteraction otrzymanaInterakcja,
+			LogicalTime time) {
 		// TODO Auto-generated method stub
 		
 	}
