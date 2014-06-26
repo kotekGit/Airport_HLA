@@ -21,13 +21,13 @@ import hla.rti.jlc.EncodingHelpers;
 import hla.rti.jlc.RtiFactoryFactory;
 import pl.edu.wat.wcy.mtsk.lotnisko.ambasadorzy.StacjaMeteorologicznaAmbasador;
 
-public class StacjaMeteorologicznaFederacja extends
+public class StacjaMeteorologicznaFederat extends
 	Federat<StacjaMeteorologicznaAmbasador> {
 
     private int uchwytDoObiektu;
     private int uchwytDoObiektuDwa;
 
-    public StacjaMeteorologicznaFederacja(String nazwa) {
+    public StacjaMeteorologicznaFederat(String nazwa) {
 	super(nazwa);
 	// TODO Auto-generated constructor stub
     }
@@ -146,5 +146,11 @@ public class StacjaMeteorologicznaFederacja extends
 
 	return aaValue;
     }
+
+	@Override
+	protected void wyslijInterakcje() throws RTIexception {
+		// TODO Auto-generated method stub
+		
+	}
 
 }

@@ -219,7 +219,7 @@ public class GuiFederat extends Federat<GuiAmbasador> {
 				updateAttributeValues(objectHandle);
 
 				// 9.2 send an interaction
-				sendInteraction();
+				wyslijInterakcje();
 
 				// 9.3 request a time advance and wait until we get it
 				advanceTime(1.0);
@@ -345,5 +345,11 @@ public class GuiFederat extends Federat<GuiAmbasador> {
 				+ fedamb.federateLookahead);
 		rtiamb.updateAttributeValues(objectHandle, attributes, generateTag(),
 				time);
+	}
+
+	@Override
+	protected void wyslijInterakcje() throws RTIexception {
+		// TODO Auto-generated method stub
+		
 	}
 }

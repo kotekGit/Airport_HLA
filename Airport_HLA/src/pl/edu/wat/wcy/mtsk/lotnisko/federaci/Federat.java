@@ -332,7 +332,8 @@ public abstract class Federat<T extends Ambasador> {
 	 * parameters we could be passing, but we don't actually have to pass any at
 	 * all!
 	 */
-	protected void sendInteraction() throws RTIexception {
+	protected abstract void wyslijInterakcje() throws RTIexception;
+	/*	Sample dla wysyłania interakcji
 		// /////////////////////////////////////////////
 		// create the necessary container and values //
 		// /////////////////////////////////////////////
@@ -366,7 +367,7 @@ public abstract class Federat<T extends Ambasador> {
 		LogicalTime time = convertTime(fedamb.federateTime
 				+ fedamb.federateLookahead);
 		rtiamb.sendInteraction(classHandle, parameters, generateTag(), time);
-	}
+	 */
 
 	/**
 	 * This method will request a time advance to the current time, plus the

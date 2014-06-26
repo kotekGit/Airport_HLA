@@ -153,4 +153,10 @@ public class SamolotFederat extends Federat<SamolotAmbasador> {
 		
 		return aaValue;
 	}
+
+	@Override
+	protected void wyslijInterakcje() throws RTIexception {
+		// TODO Auto-generated method stub
+		
+	}
 }
