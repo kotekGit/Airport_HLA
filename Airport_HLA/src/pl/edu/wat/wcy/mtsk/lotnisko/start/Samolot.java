@@ -1,7 +1,9 @@
 package pl.edu.wat.wcy.mtsk.lotnisko.start;
 
 import hla.rti.RTIexception;
+import pl.edu.wat.wcy.mtsk.lotnisko.ambasadorzy.Ambasador;
 import pl.edu.wat.wcy.mtsk.lotnisko.ambasadorzy.SamolotAmbasador;
+import pl.edu.wat.wcy.mtsk.lotnisko.federaci.Federat;
 import pl.edu.wat.wcy.mtsk.lotnisko.federaci.SamolotFederat;
 
 /**
@@ -18,8 +20,9 @@ public class Samolot {
 	}
 
 	try {
-	    new SamolotFederat(federateName)
-		    .uruchom(new SamolotAmbasador());
+	    Federat federat = new SamolotFederat(federateName);
+	    Ambasador ambasador = new SamolotAmbasador(federat);
+	    federat.uruchom(ambasador);
 	} catch (RTIexception rtie) {
 	    rtie.printStackTrace();
 	}

@@ -16,7 +16,7 @@ import hla.rti.jlc.NullFederateAmbassador;
  * @since 16.06.2014
  *
  */
-public abstract class Ambasador<T extends Federat<Ambasador>> extends NullFederateAmbassador {
+public abstract class Ambasador extends NullFederateAmbassador {
 	//----------------------------------------------------------
 		//                    STATIC VARIABLES
 		//----------------------------------------------------------
@@ -35,13 +35,14 @@ public abstract class Ambasador<T extends Federat<Ambasador>> extends NullFedera
 		public boolean isAnnounced        = false;
 		public boolean isReadyToRun       = false;
 
-	    Federat<Ambasador> federat;
+	    Federat federat;
 	    
 		//----------------------------------------------------------
 		//                      CONSTRUCTORS
 		//----------------------------------------------------------
-		public Ambasador()
+		public Ambasador(Federat federat)
 		{
+			this.federat = federat;
 		}
 
 		/**

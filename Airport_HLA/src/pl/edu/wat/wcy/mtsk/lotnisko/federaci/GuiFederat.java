@@ -32,13 +32,12 @@ import java.net.MalformedURLException;
 import java.util.ArrayList;
 
 import pl.edu.wat.wcy.mtsk.lotnisko.Utils;
-import pl.edu.wat.wcy.mtsk.lotnisko.ambasadorzy.GuiAmbasador;
 
 /**
  * Federat gui
  * @since 14.06.2014
  */
-public class GuiFederat extends Federat<GuiAmbasador> {
+public class GuiFederat extends Federat {
 
 	private String plikFederacji;
 	int objectHandle;

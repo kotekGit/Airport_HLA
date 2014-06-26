@@ -41,7 +41,7 @@ import pl.edu.wat.wcy.mtsk.lotnisko.ambasadorzy.Ambasador;
  *            - dziedziczy po Ambasador
  * @see Ambasador
  */
-public abstract class Federat<T extends Ambasador> implements Runnable {
+public abstract class Federat implements Runnable {
 	// ----------------------------------------------------------
 	// STATIC VARIABLES
 	// ----------------------------------------------------------
@@ -57,7 +57,7 @@ public abstract class Federat<T extends Ambasador> implements Runnable {
 	// INSTANCE VARIABLES
 	// ----------------------------------------------------------
 	RTIambassador rtiamb;
-	T fedamb;
+	Ambasador fedamb;
 	String nazwaFederata;
 
 	// ----------------------------------------------------------
@@ -85,7 +85,7 @@ public abstract class Federat<T extends Ambasador> implements Runnable {
 	 * @throws ConcurrentAccessAttempted
 	 * @throws FederateNotExecutionMember
 	 */
-	public void dolaczDoFederacji(String nazwaFederacji, T ambasador)
+	public void dolaczDoFederacji(String nazwaFederacji, Ambasador ambasador)
 			throws FederateAlreadyExecutionMember,
 			FederationExecutionDoesNotExist, SaveInProgress, RestoreInProgress,
 			RTIinternalError, ConcurrentAccessAttempted,
@@ -262,7 +262,7 @@ public abstract class Federat<T extends Ambasador> implements Runnable {
 	 * of the federate. For a description of the basic flow of this federate,
 	 * see the class level comments
 	 */
-	public void uruchom(T ambasador) throws RTIexception {
+	public void uruchom(Ambasador ambasador) throws RTIexception {
 		// 1. create the RTIambassador
 		rtiamb = RtiFactoryFactory.getRtiFactory().createRtiAmbassador();
 
@@ -293,9 +293,7 @@ public abstract class Federat<T extends Ambasador> implements Runnable {
 		// in this section we tell the RTI of all the data we are going to
 		// produce, and all the data we want to know about
 		zainicjujPublikacje();
-		log("Zarejestrowano na publickacje");
 		zainicjujSubskrybcje();
-		log("Zarejestrowano na subskrypcje");
 
 		zarejestrujObiekty();
 

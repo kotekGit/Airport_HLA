@@ -21,10 +21,8 @@ import hla.rti.SuppliedAttributes;
 import hla.rti.SuppliedParameters;
 import hla.rti.jlc.EncodingHelpers;
 import hla.rti.jlc.RtiFactoryFactory;
-import pl.edu.wat.wcy.mtsk.lotnisko.ambasadorzy.StacjaMeteorologicznaAmbasador;
 
-public class StacjaMeteorologicznaFederat extends
-		Federat<StacjaMeteorologicznaAmbasador> {
+public class StacjaMeteorologicznaFederat extends Federat {
 
 	private int uchwytDoObiektu;
 

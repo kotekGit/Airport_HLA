@@ -3,15 +3,15 @@ package pl.edu.wat.wcy.mtsk.lotnisko.federaci;
 import hla.rti.ConcurrentAccessAttempted;
 import hla.rti.CouldNotOpenFED;
 import hla.rti.ErrorReadingFED;
+import hla.rti.LogicalTime;
 import hla.rti.RTIexception;
-import hla.rti.LogicalTime;import hla.rti.RTIinternalError;
+import hla.rti.RTIinternalError;
 import hla.rti.ReceivedInteraction;
-import pl.edu.wat.wcy.mtsk.lotnisko.ambasadorzy.WiezaKontroliAmbasador;
 
 /**
  * @since 14.06.2014
  */
-public class WiezaKontroliFederat extends Federat<WiezaKontroliAmbasador> {
+public class WiezaKontroliFederat extends Federat {
 
 	public WiezaKontroliFederat(String nazwa) {
 		super(nazwa);

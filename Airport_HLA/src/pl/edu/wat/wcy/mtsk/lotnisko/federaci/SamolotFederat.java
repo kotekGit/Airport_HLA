@@ -22,14 +22,13 @@ import hla.rti.SaveInProgress;
 import hla.rti.SuppliedAttributes;
 import hla.rti.jlc.EncodingHelpers;
 import hla.rti.jlc.RtiFactoryFactory;
-import pl.edu.wat.wcy.mtsk.lotnisko.ambasadorzy.SamolotAmbasador;
 
 /**
  * Federat samolotu
  * 
  * @since 14.06.2014
  */
-public class SamolotFederat extends Federat<SamolotAmbasador> {
+public class SamolotFederat extends Federat {
 
 	private int uchwytDoObiektu;
 	private int uchwytDoObiektuDwa;

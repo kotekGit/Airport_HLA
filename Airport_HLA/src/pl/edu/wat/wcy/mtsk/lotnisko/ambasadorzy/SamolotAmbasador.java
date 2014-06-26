@@ -1,5 +1,6 @@
 package pl.edu.wat.wcy.mtsk.lotnisko.ambasadorzy;
 
+import pl.edu.wat.wcy.mtsk.lotnisko.federaci.Federat;
 import hla.rti.EventRetractionHandle;
 import hla.rti.LogicalTime;
 import hla.rti.ReceivedInteraction;
@@ -10,6 +11,10 @@ import hla.rti.ReceivedInteraction;
  *
  */
 public class SamolotAmbasador extends Ambasador {
+
+	public SamolotAmbasador(Federat federat) {
+		super(federat);
+	}
 
 	@Override
 	public void pobierzInterakcje(int klasaInterakcji,

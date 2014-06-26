@@ -1,10 +1,10 @@
 package pl.edu.wat.wcy.mtsk.lotnisko.ambasadorzy;
 
-import org.apache.log4j.Logger;
 import hla.rti.EventRetractionHandle;
 import hla.rti.LogicalTime;
 import hla.rti.ReceivedInteraction;
 import hla.rti.jlc.EncodingHelpers;
+import pl.edu.wat.wcy.mtsk.lotnisko.federaci.Federat;
 
 /**
  * Ambasador GUI
@@ -13,6 +13,11 @@ import hla.rti.jlc.EncodingHelpers;
  * 
  */
 public class GuiAmbasador extends Ambasador {
+
+
+	public GuiAmbasador(Federat federat) {
+		super(federat);
+	}
 
 	@Override
 	public void pobierzInterakcje(int klasaInterakcji,
