@@ -43,7 +43,7 @@ public class GuiFederat extends Federat<GuiAmbasador> {
 	public GuiFederat(String nazwa) {
 		super(nazwa);
 
-		plikFederacji = "resources/test.fed";
+		plikFederacji = Utils.PLIK_FOM;
 	}
 
 	// ////////////////////////////
