@@ -24,6 +24,7 @@
     (class InteractionRoot reliable timestamp
       (class RTIprivate reliable timestamp)
       (class StacjaMeterologiczna reliable timestamp TestSpace
+        (parameter NazwaKlasy)
         (parameter SilaWiatru)
         (parameter Zachmurzenie)
         (parameter Temperatura)
@@ -31,11 +32,15 @@
         (parameter Cisnienie)
       )
       (class Samolot reliable timestamp TestSpace
+        (parameter NazwaKlasy)
+        (parameter ClassName)
         (parameter IdSamolotu)
         (parameter Zezwolenie)
         (parameter Polozenie)
       )
       (class WiezaKontroliLotow reliable timestamp TestSpace
+        (parameter NazwaKlasy)
+        (parameter ClassName)
         (parameter Decyzja)
         (parameter IdSamolotu)
         (parameter NumerPasu)
