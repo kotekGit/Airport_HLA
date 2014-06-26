@@ -60,14 +60,14 @@ public class SamolotFederat extends Federat<SamolotAmbasador> {
 	@Override
 	public void uruchom() {
 		// TODO Auto-generated method stub
-		System.out.println("urucjomiono Samolot!!!");
+		System.out.println("Uruchomiono Samolot!!!");
 		
 		
 		try {
 			for (int i = 0; i < ITERATIONS; i++) {
 				// 9.1 update the attribute values of the instance //
 				byte[] a = aktualizuj(uchwytDoObiektu);
-				System.out.println("Zwr�cono: " + a); 
+				System.out.println("Zwrócono: " + a); 
 				// 9.2 send an interaction
 				//sendInteraction();
 
