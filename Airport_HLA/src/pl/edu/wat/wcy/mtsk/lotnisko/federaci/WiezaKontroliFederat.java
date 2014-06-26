@@ -3,8 +3,8 @@ package pl.edu.wat.wcy.mtsk.lotnisko.federaci;
 import hla.rti.ConcurrentAccessAttempted;
 import hla.rti.CouldNotOpenFED;
 import hla.rti.ErrorReadingFED;
-import hla.rti.LogicalTime;
-import hla.rti.RTIinternalError;
+import hla.rti.RTIexception;
+import hla.rti.LogicalTime;import hla.rti.RTIinternalError;
 import hla.rti.ReceivedInteraction;
 import pl.edu.wat.wcy.mtsk.lotnisko.ambasadorzy.WiezaKontroliAmbasador;
 
@@ -79,5 +79,21 @@ public class WiezaKontroliFederat extends Federat<WiezaKontroliAmbasador> {
 		// TODO Auto-generated method stub
 		
 	}
+	@Override
+	protected void wyslijInterakcje() throws RTIexception {
+		// TODO Auto-generated method stub
+		
+	}<<<<<<< .mine
+			LogicalTime time) {
+		// TODO Auto-generated method stub
+		
+	}
 
+=======
+		// TODO Auto-generated method stub
+		
+	}
+
+
+>>>>>>> .theirs
 }

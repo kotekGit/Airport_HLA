@@ -19,7 +19,7 @@ public class Samolot {
 
 	try {
 	    new SamolotFederat(federateName)
-		    .runFederate(new SamolotAmbasador());
+		    .uruchom(new SamolotAmbasador());
 	} catch (RTIexception rtie) {
 	    rtie.printStackTrace();
 	}

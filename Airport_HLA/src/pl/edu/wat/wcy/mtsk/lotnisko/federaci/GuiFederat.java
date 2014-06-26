@@ -224,7 +224,7 @@ public class GuiFederat extends Federat<GuiAmbasador> {
 				updateAttributeValues(objectHandle);
 
 				// 9.2 send an interaction
-				sendInteraction();
+				wyslijInterakcje();
 
 				// 9.3 request a time advance and wait until we get it
 				advanceTime(1.0);

@@ -23,8 +23,6 @@ import hla.rti.ReceivedInteraction;
 import hla.rti.ResignAction;
 import hla.rti.RestoreInProgress;
 import hla.rti.SaveInProgress;
-import hla.rti.SuppliedParameters;
-import hla.rti.jlc.EncodingHelpers;
 import hla.rti.jlc.RtiFactoryFactory;
 
 import org.portico.impl.hla13.types.DoubleTime;
@@ -37,11 +35,12 @@ import pl.edu.wat.wcy.mtsk.lotnisko.ambasadorzy.Ambasador;
  * Abstrakt federata.
  * 
  * @author mariusz
- *
- * @param <T> - dziedziczy po Ambasador
+ * 
+ * @param <T>
+ *            - dziedziczy po Ambasador
  * @see Ambasador
  */
-public abstract class Federat<T extends Ambasador> {
+public abstract class Federat<T extends Ambasador> implements Runnable {
 	// ----------------------------------------------------------
 	// STATIC VARIABLES
 	// ----------------------------------------------------------
@@ -67,11 +66,11 @@ public abstract class Federat<T extends Ambasador> {
 	public Federat(String nazwa) {
 		nazwaFederata = nazwa;
 	}
-	
+
 	// ----------------------------------------------------------
 	// INSTANCE METHODS
 	// ----------------------------------------------------------
-	
+
 	/**
 	 * Dołączenie do federacji
 	 * 
@@ -90,7 +89,7 @@ public abstract class Federat<T extends Ambasador> {
 			FederationExecutionDoesNotExist, SaveInProgress, RestoreInProgress,
 			RTIinternalError, ConcurrentAccessAttempted,
 			FederateNotExecutionMember {
-		
+
 		fedamb = ambasador;
 		rtiamb.joinFederationExecution(nazwaFederata, nazwaFederacji, fedamb);
 		log("Dołączono do federacji: " + nazwaFederacji);
@@ -139,7 +138,7 @@ public abstract class Federat<T extends Ambasador> {
 		// PORTICO SPECIFIC!!
 		return new DoubleTimeInterval(time);
 	}
-	
+
 	// //////////////////////////////////////////////////////////////////////////
 	// //////////////////////////// Helper Methods
 	// //////////////////////////////
@@ -177,40 +176,44 @@ public abstract class Federat<T extends Ambasador> {
 	/**
 	 * Rozpoczyna publikację.
 	 * 
-	 * @throws RTIinternalError 
-	 * @throws FederateNotExecutionMember 
-	 * @throws NameNotFound 
-	 * @throws ObjectClassNotDefined 
-	 * @throws AttributeNotDefined 
-	 * @throws ConcurrentAccessAttempted 
-	 * @throws RestoreInProgress 
-	 * @throws SaveInProgress 
-	 * @throws OwnershipAcquisitionPending 
-	 * @throws InteractionClassNotDefined 
+	 * @throws RTIinternalError
+	 * @throws FederateNotExecutionMember
+	 * @throws NameNotFound
+	 * @throws ObjectClassNotDefined
+	 * @throws AttributeNotDefined
+	 * @throws ConcurrentAccessAttempted
+	 * @throws RestoreInProgress
+	 * @throws SaveInProgress
+	 * @throws OwnershipAcquisitionPending
+	 * @throws InteractionClassNotDefined
 	 */
-	public abstract void zainicjujPublikacje() throws NameNotFound, FederateNotExecutionMember, RTIinternalError, ObjectClassNotDefined, AttributeNotDefined, OwnershipAcquisitionPending, SaveInProgress, RestoreInProgress, ConcurrentAccessAttempted, InteractionClassNotDefined;
+	public abstract void zainicjujPublikacje() throws NameNotFound,
+			FederateNotExecutionMember, RTIinternalError,
+			ObjectClassNotDefined, AttributeNotDefined,
+			OwnershipAcquisitionPending, SaveInProgress, RestoreInProgress,
+			ConcurrentAccessAttempted, InteractionClassNotDefined;
 
 	/**
 	 * Rozpoczyna subskrybcję.
 	 * 
-	 * @throws ConcurrentAccessAttempted 
-	 * @throws RestoreInProgress 
-	 * @throws SaveInProgress 
-	 * @throws OwnershipAcquisitionPending 
-	 * @throws AttributeNotDefined 
-	 * @throws ObjectClassNotDefined 
-	 * @throws RTIinternalError 
-	 * @throws FederateNotExecutionMember 
-	 * @throws NameNotFound 
-	 * @throws FederateLoggingServiceCalls 
-	 * @throws InteractionClassNotDefined 
+	 * @throws ConcurrentAccessAttempted
+	 * @throws RestoreInProgress
+	 * @throws SaveInProgress
+	 * @throws OwnershipAcquisitionPending
+	 * @throws AttributeNotDefined
+	 * @throws ObjectClassNotDefined
+	 * @throws RTIinternalError
+	 * @throws FederateNotExecutionMember
+	 * @throws NameNotFound
+	 * @throws FederateLoggingServiceCalls
+	 * @throws InteractionClassNotDefined
 	 */
-	public abstract void zainicjujSubskrybcje() throws NameNotFound, FederateNotExecutionMember, RTIinternalError, ObjectClassNotDefined, AttributeNotDefined, OwnershipAcquisitionPending, SaveInProgress, RestoreInProgress, ConcurrentAccessAttempted, InteractionClassNotDefined, FederateLoggingServiceCalls;
-
-	/**
-	 * Metoda głównego zadania federata.
-	 */
-	public abstract void uruchom();
+	public abstract void zainicjujSubskrybcje() throws NameNotFound,
+			FederateNotExecutionMember, RTIinternalError,
+			ObjectClassNotDefined, AttributeNotDefined,
+			OwnershipAcquisitionPending, SaveInProgress, RestoreInProgress,
+			ConcurrentAccessAttempted, InteractionClassNotDefined,
+			FederateLoggingServiceCalls;
 
 	/**
 	 * Metoda do rejestrowania obiektów.
@@ -223,8 +226,7 @@ public abstract class Federat<T extends Ambasador> {
 	public abstract void usunZarejestrowaneObiekty();
 
 	/**
-	 * Metoda odpalana przed końcem działania federata.
-	 * (Opcjonalna)
+	 * Metoda odpalana przed końcem działania federata. (Opcjonalna)
 	 */
 	public abstract void naKoniec();
 
@@ -238,6 +240,19 @@ public abstract class Federat<T extends Ambasador> {
 			RTIinternalError, ConcurrentAccessAttempted;
 
 	protected abstract void poDolaczeniu();
+
+	/**
+	 * Uruchamia główną pętle federata.
+	 */
+	@Override
+	public void run() {
+		uruchom();
+	}
+
+	/**
+	 * Metoda głównego zadania federata.
+	 */
+	public abstract void uruchom();
 	
 	public abstract void przeniesInterakcje(ReceivedInteraction otrzymanaInterakcja, LogicalTime time);
 	
@@ -246,7 +261,7 @@ public abstract class Federat<T extends Ambasador> {
 	 * of the federate. For a description of the basic flow of this federate,
 	 * see the class level comments
 	 */
-	public void runFederate(T ambasador) throws RTIexception {
+	public void uruchom(T ambasador) throws RTIexception {
 		// 1. create the RTIambassador
 		rtiamb = RtiFactoryFactory.getRtiFactory().createRtiAmbassador();
 
@@ -264,25 +279,26 @@ public abstract class Federat<T extends Ambasador> {
 				+ READY_TO_RUN + ", waiting for federation...");
 
 		czekajNaSynchronizacjeFederacji();
-		
+
 		// 6. enable time policies
-		
+
 		// in this section we enable/disable all time policies
 		// note that this step is optional!
 		// TODO na potem
 		// enableTimePolicy();
 		// log("Time Policy Enabled");
 
-		// 7. publish and subscribe 
+		// 7. publish and subscribe
 		// in this section we tell the RTI of all the data we are going to
-		// produce, and all the data we want to know about		
+		// produce, and all the data we want to know about
 		zainicjujPublikacje();
 		zainicjujSubskrybcje();
 		log("Published and Subscribed");
 
 		zarejestrujObiekty();
 
-		uruchom();
+		// uruchomienie głównej pętli federata
+		this.run();
 
 		usunZarejestrowaneObiekty();
 
@@ -335,41 +351,40 @@ public abstract class Federat<T extends Ambasador> {
 	 * parameters we could be passing, but we don't actually have to pass any at
 	 * all!
 	 */
-	protected void sendInteraction() throws RTIexception {
-		// /////////////////////////////////////////////
-		// create the necessary container and values //
-		// /////////////////////////////////////////////
-		// create the collection to store the values in
-		SuppliedParameters parameters = RtiFactoryFactory.getRtiFactory()
-				.createSuppliedParameters();
+	protected abstract void wyslijInterakcje() throws RTIexception;
 
-		// generate the new values
-		// we use EncodingHelpers to make things nice friendly for both Java and
-		// C++
-		byte[] xaValue = EncodingHelpers.encodeString("xa:" + getLbts());
-		byte[] xbValue = EncodingHelpers.encodeString("xb:" + getLbts());
-
-		// get the handles
-		int classHandle = rtiamb.getInteractionClassHandle("InteractionRoot.X");
-		int xaHandle = rtiamb.getParameterHandle("xa", classHandle);
-		int xbHandle = rtiamb.getParameterHandle("xb", classHandle);
-
-		// put the values into the collection
-		parameters.add(xaHandle, xaValue);
-		parameters.add(xbHandle, xbValue);
-
-		// ////////////////////////
-		// send the interaction //
-		// ////////////////////////
-		rtiamb.sendInteraction(classHandle, parameters, generateTag());
-
-		// if you want to associate a particular timestamp with the
-		// interaction, you will have to supply it to the RTI. Here
-		// we send another interaction, this time with a timestamp:
-		LogicalTime time = convertTime(fedamb.federateTime
-				+ fedamb.federateLookahead);
-		rtiamb.sendInteraction(classHandle, parameters, generateTag(), time);
-	}
+	/*
+	 * Sample dla wysyłania interakcji
+	 * 
+	 * // ///////////////////////////////////////////// // create the necessary
+	 * container and values // // /////////////////////////////////////////////
+	 * // create the collection to store the values in SuppliedParameters
+	 * parameters = RtiFactoryFactory.getRtiFactory()
+	 * .createSuppliedParameters();
+	 * 
+	 * // generate the new values // we use EncodingHelpers to make things nice
+	 * friendly for both Java and // C++ byte[] xaValue =
+	 * EncodingHelpers.encodeString("xa:" + getLbts()); byte[] xbValue =
+	 * EncodingHelpers.encodeString("xb:" + getLbts());
+	 * 
+	 * // get the handles int classHandle =
+	 * rtiamb.getInteractionClassHandle("InteractionRoot.X"); int xaHandle =
+	 * rtiamb.getParameterHandle("xa", classHandle); int xbHandle =
+	 * rtiamb.getParameterHandle("xb", classHandle);
+	 * 
+	 * // put the values into the collection parameters.add(xaHandle, xaValue);
+	 * parameters.add(xbHandle, xbValue);
+	 * 
+	 * // //////////////////////// // send the interaction // //
+	 * //////////////////////// rtiamb.sendInteraction(classHandle, parameters,
+	 * generateTag());
+	 * 
+	 * // if you want to associate a particular timestamp with the //
+	 * interaction, you will have to supply it to the RTI. Here // we send
+	 * another interaction, this time with a timestamp: LogicalTime time =
+	 * convertTime(fedamb.federateTime + fedamb.federateLookahead);
+	 * rtiamb.sendInteraction(classHandle, parameters, generateTag(), time);
+	 */
 
 	/**
 	 * This method will request a time advance to the current time, plus the

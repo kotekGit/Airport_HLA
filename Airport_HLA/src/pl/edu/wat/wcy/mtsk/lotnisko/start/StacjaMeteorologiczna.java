@@ -2,7 +2,7 @@ package pl.edu.wat.wcy.mtsk.lotnisko.start;
 
 import hla.rti.RTIexception;
 import pl.edu.wat.wcy.mtsk.lotnisko.ambasadorzy.StacjaMeteorologicznaAmbasador;
-import pl.edu.wat.wcy.mtsk.lotnisko.federaci.StacjaMeteorologicznaFederacja;
+import pl.edu.wat.wcy.mtsk.lotnisko.federaci.StacjaMeteorologicznaFederat;
 
 /**
  * Uruchomienie federacji stacji meterologicznej
@@ -17,8 +17,8 @@ public class StacjaMeteorologiczna {
 	}
 
 	try {
-	    new StacjaMeteorologicznaFederacja(federateName)
-		    .runFederate(new StacjaMeteorologicznaAmbasador());
+	    new StacjaMeteorologicznaFederat(federateName)
+		    .uruchom(new StacjaMeteorologicznaAmbasador());
 	} catch (RTIexception rtie) {
 	    rtie.printStackTrace();
 	}

@@ -24,7 +24,7 @@ public class Gui {
 		try
 		{
 			// run the example federate
-			new GuiFederat(federateName).runFederate( new GuiAmbasador());
+			new GuiFederat(federateName).uruchom(new GuiAmbasador());
 		}
 		catch( RTIexception rtie )
 		{
