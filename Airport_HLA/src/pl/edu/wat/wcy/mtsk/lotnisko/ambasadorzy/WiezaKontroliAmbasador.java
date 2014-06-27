@@ -20,8 +20,12 @@ public class WiezaKontroliAmbasador extends Ambasador {
 	public void pobierzInterakcje(int klasaInterakcji,
 			ReceivedInteraction otrzymanaInterakcja, byte[] tag,
 			LogicalTime time, EventRetractionHandle eventRetractionHandle) {
-		// TODO Auto-generated method stub
 		
+
+		log("Federat odebrał interakcję od RTI");
+		//if (EncodingHelpers.decodeString(tag).equalsIgnoreCase(
+		//		"StacjaMeterologiczna")) {
+		federat.przeniesInterakcje(otrzymanaInterakcja, time, klasaInterakcji);
 	}
 
 }
