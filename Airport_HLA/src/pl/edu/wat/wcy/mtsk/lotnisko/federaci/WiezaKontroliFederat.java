@@ -17,6 +17,7 @@ import hla.rti.SaveInProgress;
 import java.util.ArrayList;
 
 import pl.edu.wat.wcy.mtsk.lotnisko.Utils;
+import pl.edu.wat.wcy.mtsk.lotnisko.pomocnicy.DecyzjaPomocnik;
 import pl.edu.wat.wcy.mtsk.lotnisko.pomocnicy.RTIObjectsFactory;
 import pl.edu.wat.wcy.mtsk.lotnisko.pomocnicy.SamolotPomocnik;
 import pl.edu.wat.wcy.mtsk.lotnisko.pomocnicy.StacjaMeteorologicznaPomocnik;
@@ -73,7 +74,8 @@ public class WiezaKontroliFederat extends Federat {
 			if (zgloszeniaSamolotu.size() > 0 && modelMeteo != null) {
 				SamolotPomocnik s = zgloszeniaSamolotu.remove(0);
 				
-				//TODO logika decyzji
+				//logika decyzji
+				DecyzjaPomocnik.avg(modelMeteo.toArray());
 				
 				//TODO sprawdzenie dostępności pasów
 				
@@ -141,8 +143,10 @@ public class WiezaKontroliFederat extends Federat {
 
 	@Override
 	protected void wyslijInterakcje() throws RTIexception {
-		// TODO Auto-generated method stub
-
+		RTIObjectsFactory.setInteractionModelAndSend(odpowiedzDlaSamolotu, rtiamb, fedamb);
+		
+		log("Wysłano decyzje do samolotu " + odpowiedzDlaSamolotu.getIdSamolotu());
+		odpowiedzDlaSamolotu = null;
 	}
 
 	@Override
