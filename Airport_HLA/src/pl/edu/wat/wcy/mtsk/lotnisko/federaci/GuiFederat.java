@@ -1,6 +1,5 @@
 package pl.edu.wat.wcy.mtsk.lotnisko.federaci;
 
-import hla.rti.ArrayIndexOutOfBounds;
 import hla.rti.AttributeNotDefined;
 import hla.rti.ConcurrentAccessAttempted;
 import hla.rti.CouldNotOpenFED;
