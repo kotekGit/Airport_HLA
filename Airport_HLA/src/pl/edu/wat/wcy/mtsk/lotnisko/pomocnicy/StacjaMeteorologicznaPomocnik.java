@@ -65,5 +65,9 @@ public class StacjaMeteorologicznaPomocnik implements HelpModel
         return "StacjaMeteorologicznaPomocnik [silaWiatru=" + silaWiatru + ", temperatura=" + temperatura
                + ", wilgotnosc=" + wilgotnosc + ", zachmurzenie=" + zachmurzenie + ", cisnienie=" + cisnienie + "]";
     }
+    
+    public double[] toArray() {
+    	return new double[] { cisnienie, silaWiatru, temperatura, wilgotnosc, zachmurzenie };
+    }
 
 }
