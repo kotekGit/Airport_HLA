@@ -70,7 +70,7 @@ public abstract class Ambasador extends NullFederateAmbassador {
 			return ((DoubleTime)logicalTime).getTime();
 		}
 		
-		private void log( String message )
+		protected void log( String message )
 		{
 			System.out.println( "FederateAmbassador: " + message );
 		}
