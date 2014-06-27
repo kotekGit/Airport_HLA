@@ -14,9 +14,9 @@ public class WspolneZmienne
 
     // STRING VALUE FOR 'SAMOLOT'
     public static final String SAMOLOT_NAZWA_KLASY = "NazwaKlasy";
-    public static final String STACJA_ID_SAMOLOTU = "IdSamolotu";
-    public static final String STACJA_ZEZWOLENIE = "Zezwolenie";
-    public static final String STACJA_POLOZENIE = "Polozenie";
+    public static final String SAMOLOT_ID_SAMOLOTU = "IdSamolotu";
+    public static final String SAMOLOT_ZEZWOLENIE = "Zezwolenie";
+    public static final String SAMOLOT_POLOZENIE = "Polozenie";
 
     // STRING VALUE DOR 'WIEZA KONTROLI LOTOW'
     public static final String WIEZA_NAZWA_KLASY = "NazwaKlasy";

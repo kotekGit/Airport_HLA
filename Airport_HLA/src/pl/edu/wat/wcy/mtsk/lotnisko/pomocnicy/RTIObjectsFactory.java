@@ -60,7 +60,7 @@ public class RTIObjectsFactory
     {
         if ( model.getClass() == SamolotPomocnik.class )
         {
-
+            pobierzModelInteracjiSamolotuIwyslij( (SamolotPomocnik) model, rtIambassador, ambasador );
         }
         else if ( model.getClass() == StacjaMeteorologicznaPomocnik.class )
         {
@@ -70,6 +70,7 @@ public class RTIObjectsFactory
         else if ( model.getClass() == WiezaKontrolnaPomocnik.class )
         {
 
+            pobierzModelInteracjiWiezyIwyslij( (WiezaKontrolnaPomocnik) model, rtIambassador, ambasador );
         }
     }
 
@@ -128,6 +129,95 @@ public class RTIObjectsFactory
             e.printStackTrace();
         }
 
+    }
+
+    private static void pobierzModelInteracjiSamolotuIwyslij( SamolotPomocnik samolotPomocnik, RTIambassador rtiamb,
+            Ambasador fedamb )
+    {
+
+        // utworzenie kolejcji do zachowania wartości
+        SuppliedParameters parameters;
+        int samolotUchwyt;
+        int idDamolotuUchwyt;
+        int polozenieUchwyt;
+        int zezwolenieUchwyt;
+
+        try
+        {
+            parameters = RtiFactoryFactory.getRtiFactory().createSuppliedParameters();
+            samolotUchwyt = rtiamb.getInteractionClassHandle( WspolneZmienne.INTERAKCJA_SAMOLOT );
+            idDamolotuUchwyt = rtiamb.getParameterHandle( WspolneZmienne.SAMOLOT_ID_SAMOLOTU, samolotUchwyt );
+            polozenieUchwyt = rtiamb.getParameterHandle( WspolneZmienne.SAMOLOT_POLOZENIE, samolotUchwyt );
+            zezwolenieUchwyt = rtiamb.getParameterHandle( WspolneZmienne.SAMOLOT_ZEZWOLENIE, samolotUchwyt );
+
+            // przekodowanie wartości
+            // ewentualnie może być np coś takiego: "100.0".getBytes() zamiast
+            // encodeString
+
+            byte[] idSamolotuValue = EncodingHelpers.encodeString( "" + samolotPomocnik.getIdSamolotu() );
+            byte[] polozenieValue = EncodingHelpers.encodeString( "" + samolotPomocnik.getPolozenie() );
+            byte[] zezwolenieValue = EncodingHelpers.encodeString( "" + samolotPomocnik.getZezwolenie() );
+
+            // ustawienie wartości
+            parameters.add( idDamolotuUchwyt, idSamolotuValue );
+            parameters.add( polozenieUchwyt, polozenieValue );
+            parameters.add( zezwolenieUchwyt, zezwolenieValue );
+
+            // wysłanie
+            LogicalTime time = convertTime( fedamb.federateTime + fedamb.federateLookahead );
+            rtiamb.sendInteraction( samolotUchwyt, parameters, generateTag(), time );
+
+        }
+        catch ( NameNotFound | InteractionClassNotDefined | FederateNotExecutionMember | InteractionClassNotPublished
+                | InteractionParameterNotDefined | InvalidFederationTime | SaveInProgress | RestoreInProgress
+                | ConcurrentAccessAttempted | RTIinternalError e )
+        {
+            e.printStackTrace();
+        }
+    }
+
+    private static void pobierzModelInteracjiWiezyIwyslij( WiezaKontrolnaPomocnik wiezaKontrolnaPomocnik,
+            RTIambassador rtiamb, Ambasador fedamb )
+    {
+        // utworzenie kolejcji do zachowania wartości
+        SuppliedParameters parameters;
+        int wiezaKontrolnaUchwyt;
+        int idSamolotuUchwyt;
+        int decyzjaSamolotu;
+        int numerPasuUchwyt;
+
+        try
+        {
+            parameters = RtiFactoryFactory.getRtiFactory().createSuppliedParameters();
+            wiezaKontrolnaUchwyt = rtiamb.getInteractionClassHandle( WspolneZmienne.INTERAKCJA_WIEZA_KONTROLNA );
+            idSamolotuUchwyt = rtiamb.getParameterHandle( WspolneZmienne.WIEZA_ID_SAMOLOTU, wiezaKontrolnaUchwyt );
+            decyzjaSamolotu = rtiamb.getParameterHandle( WspolneZmienne.WIEZA_DECYZJA, wiezaKontrolnaUchwyt );
+            numerPasuUchwyt = rtiamb.getParameterHandle( WspolneZmienne.WIEZA_NUMER_PASU, wiezaKontrolnaUchwyt );
+
+            // przekodowanie wartości
+            // ewentualnie może być np coś takiego: "100.0".getBytes() zamiast
+            // encodeString
+
+            byte[] decyzjaValue = EncodingHelpers.encodeString( "" + wiezaKontrolnaPomocnik.getDecyzja() );
+            byte[] idsamolotuValue = EncodingHelpers.encodeString( "" + wiezaKontrolnaPomocnik.getIdSamolotu() );
+            byte[] idNumerPasu = EncodingHelpers.encodeString( "" + wiezaKontrolnaPomocnik.getNumerPasu() );
+
+            // ustawienie wartości
+            parameters.add( idSamolotuUchwyt, idsamolotuValue );
+            parameters.add( decyzjaSamolotu, decyzjaValue );
+            parameters.add( numerPasuUchwyt, idNumerPasu );
+
+            // wysłanie
+            LogicalTime time = convertTime( fedamb.federateTime + fedamb.federateLookahead );
+            rtiamb.sendInteraction( wiezaKontrolnaUchwyt, parameters, generateTag(), time );
+
+        }
+        catch ( NameNotFound | InteractionClassNotDefined | FederateNotExecutionMember | InteractionClassNotPublished
+                | InteractionParameterNotDefined | InvalidFederationTime | SaveInProgress | RestoreInProgress
+                | ConcurrentAccessAttempted | RTIinternalError e )
+        {
+            e.printStackTrace();
+        }
     }
 
     private static SamolotPomocnik parsujObiektSamolot( ReceivedInteraction interakcja )
