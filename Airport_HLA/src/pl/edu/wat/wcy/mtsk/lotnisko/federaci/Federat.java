@@ -255,7 +255,7 @@ public abstract class Federat implements Runnable {
 	 */
 	public abstract void uruchom();
 	
-	public abstract void przeniesInterakcje(ReceivedInteraction otrzymanaInterakcja, LogicalTime time);
+	public abstract void przeniesInterakcje(ReceivedInteraction otrzymanaInterakcja, LogicalTime time, int idInterakciji);
 	
 	/**
 	 * This is the main simulation loop. It can be thought of as the main method

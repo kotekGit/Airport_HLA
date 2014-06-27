@@ -27,7 +27,7 @@ public class GuiAmbasador extends Ambasador {
 		System.out.println("Zmiana pogody na stacji meteorologicznej");
 		//if (EncodingHelpers.decodeString(tag).equalsIgnoreCase(
 		//		"StacjaMeterologiczna")) {
-			federat.przeniesInterakcje(otrzymanaInterakcja, time);
+			federat.przeniesInterakcje(otrzymanaInterakcja, time, klasaInterakcji);
 		//}
 	}
 

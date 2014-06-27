@@ -20,7 +20,7 @@ public class Gui {
 		{
 			federateName = args[0];
 		}
-		
+	
 		try
 		{
 			// run the example federate

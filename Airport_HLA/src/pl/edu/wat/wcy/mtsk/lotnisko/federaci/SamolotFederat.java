@@ -160,10 +160,11 @@ public class SamolotFederat extends Federat {
 		
 	}
 
-	@Override
-	public void przeniesInterakcje(ReceivedInteraction otrzymanaInterakcja,
-			LogicalTime time) {
-		// TODO Auto-generated method stub
-		
-	}
+    @Override
+    public void przeniesInterakcje( ReceivedInteraction otrzymanaInterakcja, LogicalTime time, int idInterakciji )
+    {
+        // TODO Auto-generated method stub
+        
+    }
+
 }

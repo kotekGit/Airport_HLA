@@ -31,6 +31,8 @@ import java.net.MalformedURLException;
 import java.util.ArrayList;
 
 import pl.edu.wat.wcy.mtsk.lotnisko.Utils;
+import pl.edu.wat.wcy.mtsk.lotnisko.pomocnicy.RTIObjectsFactory;
+import pl.edu.wat.wcy.mtsk.lotnisko.pomocnicy.StacjaMeteorologicznaPomocnik;
 import pl.edu.wat.wcy.mtsk.lotnisko.pomocnicy.ThreadPomocnik;
 
 /**
@@ -42,6 +44,7 @@ public class GuiFederat extends Federat {
 	private String plikFederacji;
 	int objectHandle;
 	ArrayList<Double> stacjaMetWartosci;
+	RTIObjectsFactory rtiObjectsFactory;
 	
 	public GuiFederat(String nazwa) {
 		super(nazwa);
@@ -353,21 +356,10 @@ public class GuiFederat extends Federat {
 
 	@Override
 	public void przeniesInterakcje(ReceivedInteraction otrzymanaInterakcja,
-			LogicalTime time) {
-		//pobranie danych ze stacji 
-		try {
-			Double silaWiatru = Double.parseDouble(EncodingHelpers.decodeString(otrzymanaInterakcja.getValue(0)));
-			Double temperatura = Double.parseDouble(EncodingHelpers.decodeString(otrzymanaInterakcja.getValue(1)));
-			Double zachmuerzenie = Double.parseDouble(EncodingHelpers.decodeString(otrzymanaInterakcja.getValue(2)));
-			stacjaMetWartosci.add(silaWiatru);
-			stacjaMetWartosci.add(temperatura);
-			stacjaMetWartosci.add(zachmuerzenie);
-			System.out.println("Otrzymano dane z interakcji, zachmuerzenie: " +zachmuerzenie);
-		} catch (NumberFormatException | ArrayIndexOutOfBounds e) {
-			// TODO Auto-generated catch block
-			System.out.println("Nie udalo sie pobrac wartosci");
-			e.printStackTrace();
-		}
+			LogicalTime time, int idItnterakcji)
+	{	    
+	    StacjaMeteorologicznaPomocnik stacja =  (StacjaMeteorologicznaPomocnik) rtiObjectsFactory.getRTIObjectForInteraction( otrzymanaInterakcja, idItnterakcji, rtiamb );
+	    System.out.println("Dane ze stacji meteorologicznej: " + stacja);
 		
 	}
 

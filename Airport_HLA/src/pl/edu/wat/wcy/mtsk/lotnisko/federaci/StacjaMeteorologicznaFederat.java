@@ -22,7 +22,9 @@ import hla.rti.SuppliedParameters;
 import hla.rti.jlc.EncodingHelpers;
 import hla.rti.jlc.RtiFactoryFactory;
 import pl.edu.wat.wcy.mtsk.lotnisko.Utils;
+import pl.edu.wat.wcy.mtsk.lotnisko.pomocnicy.StacjaMeteorologicznaPomocnik;
 import pl.edu.wat.wcy.mtsk.lotnisko.pomocnicy.ThreadPomocnik;
+import pl.edu.wat.wcy.mtsk.lotnisko.pomocnicy.WspolneZmienne;
 
 public class StacjaMeteorologicznaFederat extends Federat {
 
@@ -181,23 +183,33 @@ public class StacjaMeteorologicznaFederat extends Federat {
 
 		int stacjaMeteorologinczaUchwyt = rtiamb
 				.getInteractionClassHandle("InteractionRoot.StacjaMeterologiczna");
-		int silaWiatruUchwyt = rtiamb.getParameterHandle("SilaWiatru",
+		int silaWiatruUchwyt = rtiamb.getParameterHandle(WspolneZmienne.STACJA_SILA_WIATRU,
 				stacjaMeteorologinczaUchwyt);
-		int temperaturaUchwyt = rtiamb.getParameterHandle("Temperatura",
+		int temperaturaUchwyt = rtiamb.getParameterHandle(WspolneZmienne.STACJA_ZACHMURZENIE,
 				stacjaMeteorologinczaUchwyt);
-		int zachmurzenieUchwyt = rtiamb.getParameterHandle("Zachmurzenie",
+		int zachmurzenieUchwyt = rtiamb.getParameterHandle(WspolneZmienne.STACJA_TEMPERATURA,
 				stacjaMeteorologinczaUchwyt);
+	    int wilgotnoscUchwyt = rtiamb.getParameterHandle(WspolneZmienne.STACJA_WILGOTNOSC,
+	                stacjaMeteorologinczaUchwyt);
+	    int cisnienieUchwyt = rtiamb.getParameterHandle(WspolneZmienne.STACJA_CISNIENIE,
+                   stacjaMeteorologinczaUchwyt);
+
 
 		// przekodowanie wartości
 		// ewentualnie może być np coś takiego: "100.0".getBytes() zamiast encodeString
+		
 		byte[] silaWiatruValue = EncodingHelpers.encodeString("" + getLbts());
 		byte[] temperaturaValue = EncodingHelpers.encodeString("" + getLbts());
 		byte[] zachmurzenieValue = EncodingHelpers.encodeString("" +getLbts());
+	    byte[] wilgotnoscValue = EncodingHelpers.encodeString("" +getLbts());
+	    byte[] cisnienieValue = EncodingHelpers.encodeString("" +getLbts());
 
 		// ustawienie wartości
 		parameters.add(silaWiatruUchwyt, silaWiatruValue);
 		parameters.add(temperaturaUchwyt, temperaturaValue);
 		parameters.add(zachmurzenieUchwyt, zachmurzenieValue);
+	    parameters.add(wilgotnoscUchwyt, wilgotnoscValue);
+	    parameters.add(cisnienieUchwyt, cisnienieValue);
 
 		// wysłanie
 		LogicalTime time = convertTime(fedamb.federateTime
@@ -207,10 +219,12 @@ public class StacjaMeteorologicznaFederat extends Federat {
 		log("Wysłano statystyki pogodowe");
 	}
 
-	@Override
-	public void przeniesInterakcje(ReceivedInteraction otrzymanaInterakcja,
-			LogicalTime time) {
-		// TODO Auto-generated method stub
-		
-	}
+    @Override
+    public void przeniesInterakcje( ReceivedInteraction otrzymanaInterakcja, LogicalTime time, int idInterakciji )
+    {
+        // TODO Auto-generated method stub
+        
+    }
+
+
 }

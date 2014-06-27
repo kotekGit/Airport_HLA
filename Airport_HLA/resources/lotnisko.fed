@@ -16,7 +16,7 @@
       (class RTIprivate)
       (class Symulacja
         (attribute StanSumulacji reliable timestamp TestSpace) ;; more comments!
-        (attribute ZajestoscPasow reliable timestamp TestSpace)
+        (attribute ZajetoscPasow reliable timestamp TestSpace)
       )
     )
   )
@@ -24,7 +24,6 @@
     (class InteractionRoot reliable timestamp
       (class RTIprivate reliable timestamp)
       (class StacjaMeterologiczna reliable timestamp TestSpace
-        (parameter NazwaKlasy)
         (parameter SilaWiatru)
         (parameter Zachmurzenie)
         (parameter Temperatura)
@@ -32,15 +31,11 @@
         (parameter Cisnienie)
       )
       (class Samolot reliable timestamp TestSpace
-        (parameter NazwaKlasy)
-        (parameter ClassName)
         (parameter IdSamolotu)
         (parameter Zezwolenie)
         (parameter Polozenie)
       )
       (class WiezaKontroliLotow reliable timestamp TestSpace
-        (parameter NazwaKlasy)
-        (parameter ClassName)
         (parameter Decyzja)
         (parameter IdSamolotu)
         (parameter NumerPasu)
