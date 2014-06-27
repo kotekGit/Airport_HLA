@@ -7,21 +7,24 @@ import hla.rti.ReceivedInteraction;
 
 /**
  * Ambasador samolotu
+ * 
  * @since 14.06.2014
- *
+ * 
  */
 public class SamolotAmbasador extends Ambasador {
 
-	public SamolotAmbasador(Federat federat) {
-		super(federat);
-	}
+    public SamolotAmbasador(Federat federat) {
+	super(federat);
+    }
 
-	@Override
-	public void pobierzInterakcje(int klasaInterakcji,
-			ReceivedInteraction otrzymanaInterakcja, byte[] tag,
-			LogicalTime time, EventRetractionHandle eventRetractionHandle) {
-		// TODO Auto-generated method stub
-		
-	}
+    @Override
+    public void pobierzInterakcje(int klasaInterakcji,
+	    ReceivedInteraction otrzymanaInterakcja, byte[] tag,
+	    LogicalTime time, EventRetractionHandle eventRetractionHandle) {
+
+	log("Federat odebrał interakcję od RTI");
+	federat.przeniesInterakcje(otrzymanaInterakcja, time, klasaInterakcji);
+
+    }
 
 }

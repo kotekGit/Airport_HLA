@@ -1,5 +1,7 @@
 package pl.edu.wat.wcy.mtsk.lotnisko.federaci;
 
+import java.util.ArrayList;
+
 import hla.rti.AttributeNotDefined;
 import hla.rti.ConcurrentAccessAttempted;
 import hla.rti.CouldNotOpenFED;
@@ -20,6 +22,9 @@ import pl.edu.wat.wcy.mtsk.lotnisko.Utils;
 import pl.edu.wat.wcy.mtsk.lotnisko.pomocnicy.RTIObjectsFactory;
 import pl.edu.wat.wcy.mtsk.lotnisko.pomocnicy.SamolotPomocnik;
 import pl.edu.wat.wcy.mtsk.lotnisko.pomocnicy.ThreadPomocnik;
+import pl.edu.wat.wcy.mtsk.lotnisko.pomocnicy.WiezaKontrolnaPomocnik;
+import pl.edu.wat.wcy.mtsk.lotnisko.pomocnicy.WspolneZmienne;
+import pl.edu.wat.wcy.mtsk.lotnisko.start.WiezaKontroli;
 
 /**
  * Federat samolotu
@@ -29,15 +34,22 @@ import pl.edu.wat.wcy.mtsk.lotnisko.pomocnicy.ThreadPomocnik;
 public class SamolotFederat extends Federat {
 
     RTIObjectsFactory rtiObjectsFactory;
-    
+    private ArrayList<WiezaKontrolnaPomocnik> zgloszeniaWiezy;
 
     public SamolotFederat(String nazwa) {
 	super(nazwa);
-	// TODO Auto-generated constructor stub
+	zgloszeniaWiezy = new ArrayList<WiezaKontrolnaPomocnik>();
     }
 
     @Override
-    public void zainicjujPublikacje() {
+    public void zainicjujPublikacje() throws NameNotFound,
+	    FederateNotExecutionMember, RTIinternalError,
+	    InteractionClassNotDefined, SaveInProgress, RestoreInProgress,
+	    ConcurrentAccessAttempted {
+
+	int wiezaUchwyt = rtiamb
+		.getInteractionClassHandle(WspolneZmienne.INTERAKCJA_WIEZA_KONTROLNA);
+	rtiamb.publishInteractionClass(wiezaUchwyt);
     }
 
     @Override
@@ -45,10 +57,12 @@ public class SamolotFederat extends Federat {
 	    FederateNotExecutionMember, RTIinternalError,
 	    ObjectClassNotDefined, AttributeNotDefined,
 	    OwnershipAcquisitionPending, SaveInProgress, RestoreInProgress,
-	    ConcurrentAccessAttempted, InteractionClassNotDefined, FederateLoggingServiceCalls {
+	    ConcurrentAccessAttempted, InteractionClassNotDefined,
+	    FederateLoggingServiceCalls {
 
 	int interactionHandle = rtiamb
-		.getInteractionClassHandle("WiezaKontrolna");
+		.getInteractionClassHandle(WspolneZmienne.INTERAKCJA_WIEZA_KONTROLNA);
+
 	rtiamb.subscribeInteractionClass(interactionHandle);
     }
 
@@ -58,6 +72,17 @@ public class SamolotFederat extends Federat {
 	System.out.println("Uruchomiono Samolot!!!");
 
 	while (true) {
+	    if (zgloszeniaWiezy.size() > 0) {
+		WiezaKontrolnaPomocnik w = zgloszeniaWiezy.remove(0);
+		if (w.getDecyzja() == 0) {
+		    //odmowa lądowania.
+		    log("tu cos powinno byc");
+		} else {
+		    //Zezwolono na lądowanie.
+		    log("tu cos powinno byc 2");
+		}
+	    }
+	    
 	    try {
 		advanceTime(1.0);
 	    } catch (RTIexception e) {
@@ -108,13 +133,18 @@ public class SamolotFederat extends Federat {
 
     }
 
-    @SuppressWarnings("static-access")
     @Override
     public void przeniesInterakcje(ReceivedInteraction otrzymanaInterakcja,
 	    LogicalTime time, int idInterakciji) {
 	
-	SamolotPomocnik samolot = (SamolotPomocnik) rtiObjectsFactory.getRTIObjectForInteraction(otrzymanaInterakcja, idInterakciji, rtiamb);
-	log("Dane z samolotu: " + samolot);
+	Object model = RTIObjectsFactory.getRTIObjectForInteraction(
+		otrzymanaInterakcja, idInterakciji, rtiamb);
+	if (model.getClass() == WiezaKontrolnaPomocnik.class) {
+	    WiezaKontrolnaPomocnik wkp = (WiezaKontrolnaPomocnik) model; 
+	    zgloszeniaWiezy.add(wkp);
+	    log("Odebrano zgłoszenie wiezy: " + wkp.getDecyzja());
+	}
+
     }
 
 }
